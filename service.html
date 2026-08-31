@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service — Dalia Ahmed Digital Agency</title>
+    <meta name="description" content="Dalia Ahmed Digital Agency service details.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="assets/js/tailwind.js"></script>
+    <script src="assets/js/lucide.min.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
+                        space: ['Space Grotesk', 'sans-serif'],
+                        cairo: ['Cairo', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#7C3AED',
+                        secondary: '#00D4FF',
+                        accent: '#FF4FD8',
+                        dark: {
+                            900: '#050816',
+                            800: '#0F172A',
+                            700: '#111827',
+                            600: '#1E293B',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        ::selection { background: #7C3AED; color: white; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #050816; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #7C3AED, #00D4FF); border-radius: 3px; }
+
+        #loader {
+            position: fixed; inset: 0; z-index: 9999;
+            background: #050816;
+            display: flex; align-items: center; justify-content: center; flex-direction: column;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        #loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        #loader { animation: loaderAutoHide 1s ease 4s forwards; }
+        @keyframes loaderAutoHide { to { opacity: 0; visibility: hidden; pointer-events: none; } }
+        .loader-ring {
+            width: 60px; height: 60px; border-radius: 50%; border: 3px solid transparent;
+            border-top-color: #7C3AED; border-right-color: #00D4FF; animation: loaderSpin 1s linear infinite;
+        }
+        .loader-ring-inner {
+            width: 40px; height: 40px; border-radius: 50%; border: 3px solid transparent;
+            border-bottom-color: #FF4FD8; border-left-color: #7C3AED; animation: loaderSpin 0.6s linear infinite reverse; position: absolute;
+        }
+        @keyframes loaderSpin { to { transform: rotate(360deg); } }
+
+        #scrollProgress {
+            position: fixed; top: 0; left: 0; height: 3px; z-index: 10001;
+            background: linear-gradient(90deg, #7C3AED, #00D4FF, #FF4FD8); transition: width 0.1s linear; width: 0%;
+        }
+        #mouseGlow {
+            position: fixed; width: 400px; height: 400px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(124,58,237,0.06) 0%, transparent 70%);
+            pointer-events: none; z-index: 1; transform: translate(-50%, -50%);
+            transition: left 0.3s ease-out, top 0.3s ease-out;
+        }
+        .glass-card {
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.08); border-radius: 1.5rem;
+            transition: all 0.5s cubic-bezier(0.4,0,0.2,1);
+        }
+        .glass-card:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(124,58,237,0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 25px 60px -15px rgba(124,58,237,0.2), 0 0 30px rgba(124,58,237,0.1);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #7C3AED, #00D4FF, #FF4FD8);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        html.light body { background: #F8FAFC !important; color: #0F172A !important; }
+        html.light .glass-card { background: rgba(255,255,255,0.6) !important; border-color: rgba(0,0,0,0.08) !important; }
+        html.light .nav { background: rgba(248,250,252,0.85) !important; border-color: rgba(0,0,0,0.08) !important; }
+        html.light .dark\:bg-dark-900 { background: #F8FAFC !important; }
+        html.light .dark\:text-white { color: #0F172A !important; }
+        html.light .dark\:text-gray-400 { color: #64748B !important; }
+        .fade-in-up { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.4,0,0.2,1); }
+        .fade-in-up.visible { opacity: 1; transform: translateY(0); }
+        @keyframes float {
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        .feature-item { display: flex; gap: 0.75rem; align-items: flex-start; padding: 1rem 1.25rem; border-radius: 1rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); }
+        .feature-item i { flex-shrink: 0; margin-top: 2px; }
+        #contentBody p, #contentBody li { line-height: 1.9; }
+    </style>
+</head>
+<body class="font-inter bg-dark-900 text-white overflow-x-hidden">
+
+<div id="loader">
+    <div class="relative flex items-center justify-center">
+        <div class="loader-ring"></div>
+        <div class="loader-ring-inner"></div>
+    </div>
+    <p class="mt-6 font-space text-sm tracking-widest uppercase text-gray-400">Loading</p>
+</div>
+
+<div id="scrollProgress"></div>
+<div id="mouseGlow"></div>
+
+<!-- NAV -->
+<nav id="navbar" class="nav fixed top-0 left-0 right-0 z-[1000] transition-all duration-500" style="background: rgba(5,8,22,0.8); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <a href="index.html" class="flex items-center gap-2 group">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center font-poppins font-bold text-white text-lg">D</div>
+            <span class="font-poppins font-bold text-xl tracking-tight">DALIA AHMED</span>
+        </a>
+        <div class="flex items-center gap-3">
+            <a href="index.html#services" class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm font-semibold hover:border-primary/30 transition-all duration-300">
+                <i data-lucide="arrow-left" class="w-4 h-4 back-arrow"></i>
+                <span data-i18n="back">Back to Services</span>
+            </a>
+            <button id="langToggle" class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm font-semibold hover:border-primary/30 transition-all duration-300" aria-label="Toggle language">
+                <span>العربية</span><i data-lucide="globe" class="w-4 h-4"></i>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative pt-32 pb-16 overflow-hidden">
+    <div class="absolute inset-0">
+        <div class="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full blur-[120px] animate-pulse hero-glow"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-[450px] h-[450px] rounded-full blur-[100px] animate-pulse hero-glow2"></div>
+    </div>
+    <div class="relative z-10 max-w-5xl mx-auto px-6 text-center fade-in-up">
+        <div id="iconWrap" class="w-20 h-20 mx-auto rounded-3xl flex items-center justify-center mb-8" style="background: rgba(124,58,237,0.15); animation: float 6s ease-in-out infinite;">
+            <i id="serviceIcon" data-lucide="sparkles" class="w-10 h-10" style="color:#7C3AED"></i>
+        </div>
+        <div id="badge" class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-6 text-sm">
+            <span data-i18n="badge">Our Service</span>
+        </div>
+        <h1 id="serviceTitle" class="font-poppins font-bold text-4xl md:text-6xl tracking-tight mb-6">Service</h1>
+        <p id="serviceDesc" class="text-gray-400 text-lg max-w-2xl mx-auto">Service description.</p>
+    </div>
+</section>
+
+<!-- CONTENT -->
+<section class="relative pb-24 overflow-hidden">
+    <div class="relative z-10 max-w-5xl mx-auto px-6">
+        <div class="glass-card p-8 md:p-12 fade-in-up" style="border-radius: 2rem;">
+            <div id="contentBody" class="space-y-6"></div>
+        </div>
+
+        <!-- CTA -->
+        <div class="text-center mt-16 fade-in-up">
+            <h2 class="font-poppins font-bold text-3xl md:text-4xl mb-4" data-i18n="ctaTitle">Ready to Get Started?</h2>
+            <p class="text-gray-400 mb-8" data-i18n="ctaText">Let's bring your service needs to life. Get in touch with us today.</p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="https://wa.me/201023116065" target="_blank" class="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-primary to-secondary text-white font-semibold hover:shadow-[0_0_40px_rgba(124,58,237,0.4)] transition-all duration-300 hover:scale-105">
+                    <span data-i18n="ctaWhatsapp">Start Your Project</span><i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </a>
+                <a href="mailto:daliaahmedreda24@gmail.com" class="inline-flex items-center gap-2 px-8 py-4 rounded-full glass-card text-white font-semibold hover:border-primary/30 transition-all duration-300">
+                    <i data-lucide="mail" class="w-5 h-5"></i><span>daliaahmedreda24@gmail.com</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="relative pt-12 pb-8 border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-gray-500 text-sm">&copy; 2025 Dalia Ahmed. All rights reserved.</p>
+        <a href="index.html" class="text-gray-500 text-sm hover:text-primary transition-colors">Home</a>
+    </div>
+</footer>
+
+<script>
+try { lucide.createIcons(); } catch(e) {}
+
+const SERVICES = {
+    webDesign: {
+        icon: 'monitor', color: '#7C3AED', bg: 'rgba(124,58,237,0.15)', glow: 'rgba(124,58,237,0.12)', glow2: 'rgba(0,212,255,0.08)',
+        en: {
+            title: 'Web Design', desc: 'Stunning, responsive designs that captivate visitors and create lasting impressions.',
+            features: ['Custom, unique designs built from scratch', 'Fully responsive across all devices', 'Fast, secure and SEO-optimized performance', 'UX/UI focused on user experience', 'Brand-consistent visual identity'],
+            content: `<p>We build beautiful, modern websites that reflect your brand identity and turn visitors into loyal customers. Every design we deliver is crafted to be as enjoyable to use as it is to look at.</p>
+            <p>We are not just designers — we are success partners who turn your digital dreams into impactful interactive platforms that reflect your identity and achieve your business goals.</p>
+            <h3 class="font-bold text-lg mt-6 mb-2">Our Vision: Design That Inspires and Impacts</h3>
+            <p>We aspire to be the first destination for anyone seeking professional web design that combines modern aesthetics, ease of use, and strong technical performance. We believe good design feels natural — yet it is the product of thousands of hours of thinking and innovation.</p>
+            <h3 class="font-bold text-lg mt-6 mb-2">Why Choose Our Web Design?</h3>
+            <p>Every project is unique, so we offer tailored solutions that fit your business size, your field, and your future vision. From startups to established organizations, we are here to support you every step of the way with ongoing support and competitive pricing.</p>`
+        },
+        ar: {
+            title: 'تصميم المواقع', desc: 'تصاميم مذهلة ومتجاوبة تخطف انتباه الزوار وتترك انطباعاً دائماً.',
+            features: ['تصاميم حصرية ومبتكرة مبنية من الصفر', 'متجاوبة بالكامل مع جميع الأجهزة', 'أداء سريع وآمن ومحسّن لمحركات البحث', 'تركيز على تجربة المستخدم (UX/UI)', 'هوية بصرية متسقة مع علامتك التجارية'],
+            content: `<p>نصنع مواقع إلكترونية جميلة وعصرية تعكس هوية علامتك التجارية وتحوّل الزوار إلى عملاء أوفياء. كل تصميم نقدمه يُصاغ ليكون ممتعاً في الاستخدام بقدر جماله في المظهر.</p>
+            <p>نحن لسنا مجرد مصممين، نحن شركاء نجاح نحول أحلامك الرقمية إلى منصات تفاعلية مؤثرة تعكس هويتك وتحقق أهدافك التجارية.</p>
+            <h3 class="font-bold text-lg mt-6 mb-2">رؤيتنا: تصميم يلهم ويؤثر</h3>
+            <p>نطمح أن نكون الوجهة الأولى لكل من يبحث عن تصميم مواقع احترافي يجمع بين الجماليات العصرية، وسهولة الاستخدام، والأداء التقني القوي. نؤمن أن التصميم الجيد يبدو طبيعياً، لكنه في الحقيقة نتاج آلاف الساعات من التفكير والابتكار.</p>
+            <h3 class="font-bold text-lg mt-6 mb-2">لماذا تختار تصميم مواقعنا؟</h3>
+            <p>كل مشروع فريد، لذلك نقدم حلولاً مخصصة تناسب حجم عملك ومجال تخصصك ورؤيتك المستقبلية. من الشركات الناشئة إلى المؤسسات الراسخة، نحن هنا لدعمك في كل خطوة مع دعم مستمر وأسعار تنافسية.</p>`
+        }
+    },
+    webDevelopment: {
+        icon: 'code-2', color: '#00D4FF', bg: 'rgba(0,212,255,0.15)', glow: 'rgba(0,212,255,0.12)', glow2: 'rgba(255,79,216,0.08)',
+        en: {
+            title: 'Web Development', desc: 'Robust, scalable web applications built with cutting-edge technologies.',
+            features: ['Custom solutions, not ready-made templates', 'Modern front-end & powerful back-end', 'SEO-optimized and fully responsive', 'High standards of security & protection', 'Continuous technical support'],
+            content: `<p>We don't just build websites — we build integrated digital platforms that tell your story and serve your customers efficiently. Our team of elite developers specializes in the latest web technologies.</p>
+            <p>From front-end development with React and Vue.js to powerful back-end systems using Node.js, Laravel, and Python, we deliver fast, secure, and scalable solutions.</p>
+            <h3 class="font-bold text-lg mt-6 mb-2">Our Philosophy</h3>
+            <p>Successful technology is the kind users don't feel — they only feel smooth performance and ease of use. Our philosophy rests on deep understanding of your needs, technical excellence, and a partnership that continues after launch.</p>
+            <h3 class="font-bold text-lg mt-6 mb-2">Why Work With Us?</h3>
+            <p>We are not just developers — our team includes UX designers, data analysts, and cybersecurity specialists, ensuring your final product is complete in every aspect. We stick to agreed delivery dates without compromising quality.</p>`
+        },
+        ar: {
+            title: 'تطوير المواقع', desc: 'تطبيقات ويب قوية وقابلة للتوسع مبنية بأحدث التقنيات.',
+            features: ['حلول مخصصة وليست قوالب جاهزة', 'واجهات حديثة وأنظمة خلفية قوية', 'محسّنة لمحركات البحث ومتجاوبة', 'أعلى معايير الأمان والحماية', 'دعم فني مستمر'],
+            content: `<p>نحن لا نصنع المواقع فقط؛ بل نبني منصات رقمية متكاملة تحكي قصتك وتخدم عملاءك بكفاءة. فريقنا من نخبة المطورين المتخصصين في أحدث تقنيات الويب.</p>
+            <p>من تطوير الواجهات الأمامية باستخدام React و Vue.js، وصولاً إلى الأنظمة الخلفية القوية باستخدام Node.js و Laravel و Python، نقدم حلولاً سريعة وآمنة وقابلة للتوسع.</p>
+            <h3 class="font-bold text-lg mt-6 mb-2">فلسفتنا</h3>
+            <p>التكنولوجيا الناجحة هي تلك التي لا يشعر بها المستخدم، بل يشعر بسلاسة الأداء وسهولة الاستخدام. فلسفتنا تقوم على فهم عميق لاحتياجاتك، وتفوق تقني، وشراكة تستمر بعد الإطلاق.</p>
+            <h3 class="font-bold text-lg mt-6 mb-2">لماذا تعمل معنا؟</h3>
+            <p>لسنا مجرد مطورين، ففريقنا يضم مصممي تجربة مستخدم ومحللي بيانات ومتخصصي أمن سيبراني، مما يضمن منتجاً نهائياً متكاملاً في كل جوانبه. ونلتزم بمواعيد التسليم دون المساس بالجودة.</p>`
+        }
+    },
+    ecom: {
+        icon: 'shopping-cart', color: '#FF4FD8', bg: 'rgba(255,79,216,0.15)', glow: 'rgba(255,79,216,0.12)', glow2: 'rgba(124,58,237,0.08)',
+        en: {
+            title: 'E-commerce Stores', desc: 'High-converting online stores that turn browsers into loyal customers.',
+            features: ['Seamless shopping experience', 'Secure payment integration', 'Product & inventory management', 'Mobile-optimized storefront', 'Analytics and marketing tools'],
+            content: `<p>We create online stores that redefine the meaning of online shopping — warm, personal, and trustworthy experiences that convert visitors into loyal customers.</p>
+            <p>We launched with a clear vision: providing exceptional products and a seamless shopping journey. Every detail is treated as if it were meant for a member of our own family.</p>
+            <h3 class="font-bold text-lg mt-6 mb-2">Excellence in E-commerce</h3>
+            <p>Trust is the most precious currency online. We help you build trust through transparency, knowledge, and human service — guiding customers to the best option that fits their budget and taste.</p>
+            <h3 class="font-bold text-lg mt-6 mb-2">Our Firm Values</h3>
+            <p>Quality first, honesty with the customer, continuous innovation, and a one-team spirit. We consider every customer a partner in our success journey, and every sale the beginning of a relationship.</p>`
+        },
+        ar: {
+            title: 'متاجر التجارة الإلكترونية', desc: 'متاجر إلكترونية عالية التحويل تحوّل المتصفحين إلى عملاء أوفياء.',
+            features: ['تجربة شراء سلسة', 'دمج دفع آمن', 'إدارة المنتجات والمخزون', 'واجهة محسّنة للجوال', 'أدوات تحليلات وتسويق'],
+            content: `<p>نصنع متاجر إلكترونية تعيد تعريف معنى التسوق عبر الإنترنت — تجارب دافئة وشخصية وموثوقة تحوّل الزوار إلى عملاء أوفياء.</p>
+            <p>انطلقنا برؤية واضحة: توفير منتجات استثنائية ورحلة شراء سلسة. نتعامل مع كل تفصيلة وكأنها مخصصة لأحد أفراد عائلتنا.</p>
+            <h3 class="font-bold text-lg mt-6 mb-2">التميز في التجارة الإلكترونية</h3>
+            <p>الثقة هي العملة الأغلى على الإنترنت. نساعدك في بناء الثقة عبر الشفافية والمعرفة والخدمة الإنسانية — وتوجيه العملاء نحو الخيار الأفضل الذي يناسب ميزانيتهم وذوقهم.</p>
+            <h3 class="font-bold text-lg mt-6 mb-2">قيمنا الراسخة</h3>
+            <p>الجودة أولاً، والصدق مع العميل، والابتكار المستمر، وروح الفريق الواحد. نعتبر كل عميل شريكاً في رحلة نجاحنا، وكل عملية بيع بداية لعلاقة طويلة.</p>`
+        }
+    },
+    seo: {
+        icon: 'search', color: '#4ADE80', bg: 'rgba(74,222,128,0.15)', glow: 'rgba(74,222,128,0.12)', glow2: 'rgba(124,58,237,0.08)',
+        en: {
+            title: 'SEO Optimization', desc: 'Dominate search rankings and drive organic traffic to your website.',
+            features: ['Data-driven SEO strategies', 'On-page & off-page optimization', 'Keyword & competitor research', 'Transparent dashboards & reports', 'Continuous monitoring & improvement'],
+            content: `<p>In a rapidly changing digital world, we help your business appear at the top of search results. We believe success is not a coincidence — it is the product of a well-crafted strategy and a deep understanding of search algorithms.</p>
+            <p>We don't follow off-the-shelf solutions; we design a unique roadmap for each client that fits their business and resonates with their ambitious goals.</p>
+            <h3 class="font-bold text-lg mt-6 mb-2">Why Choose Our SEO?</h3>
+            <p>We won't promise you the #1 spot overnight — those are unrealistic promises. But we promise a real, sustainable growth journey built on data, transparent reporting, and continuous optimization that adapts to changing algorithms.</p>`
+        },
+        ar: {
+            title: 'تحسين محركات البحث', desc: 'الهيمنة على ترتيب البحث وجذب زيارات عضوية إلى موقعك.',
+            features: ['استراتيجيات SEO مبنية على البيانات', 'تحسين داخلي وخارجي', 'بحث الكلمات المفتاحية والمنافسين', 'لوحات تحكم وتقارير شفافة', 'متابعة وتحسين مستمر'],
+            content: `<p>في عالم رقمي سريع التغير، نساعد عملك على الظهور في مقدمة نتائج البحث. نؤمن أن النجاح ليس صدفة، بل نتاج استراتيجية مدروسة وفهم عميق لخوارزميات البحث.</p>
+            <p>لا نتبع الحلول الجاهزة؛ بل نصمم لكل عميل خارطة طريق فريدة تناسب حجم أعماله وتتناغم مع أهدافه الطموحة.</p>
+            <h3 class="font-bold text-lg mt-6 mb-2">لماذا تختار خدمات SEO لدينا؟</h3>
+            <p>لن نعدك بالمركز الأول خلال يوم، فهذه وعود غير واقعية. لكننا نعدك برحلة نمو حقيقية ومستدامة مبنية على البيانات، تقارير شفافة، وتحسين مستمر يتكيف مع تغير الخوارزميات.</p>`
+        }
+    },
+    digitalMarketing: {
+        icon: 'megaphone', color: '#FACC15', bg: 'rgba(250,204,21,0.15)', glow: 'rgba(250,204,21,0.12)', glow2: 'rgba(255,79,216,0.08)',
+        en: {
+            title: 'Digital Marketing', desc: 'Data-driven marketing strategies that maximize ROI and fuel growth.',
+            features: ['Full-funnel marketing strategy', 'Content marketing & social campaigns', 'Paid & organic growth channels', 'Performance analytics & ROI tracking', 'Audience segmentation & targeting'],
+            content: `<p>We craft data-driven marketing strategies that maximize ROI and fuel sustainable growth for your brand across every digital channel.</p>
+            <p>From content marketing to paid campaigns, we align every effort with your business goals, track performance relentlessly, and optimize to deliver measurable results.</p>
+            <h3 class="font-bold text-lg mt-6 mb-2">Our Approach</h3>
+            <p>Marketing is not guesswork. We study your audience, competitors, and market, then build an integrated strategy across the full funnel — attracting, engaging, and converting customers that become loyal advocates.</p>`
+        },
+        ar: {
+            title: 'التسويق الرقمي', desc: 'استراتيجيات تسويق مبنية على البيانات تزيد العائد على الاستثمار وتغذي النمو.',
+            features: ['استراتيجية تسويق متكاملة', 'تسويق محتوى وحملات اجتماعية', 'قنوات نمو مدفوعة وعضوية', 'تحليلات أداء وتتبع عائد الاستثمار', 'تقسيم واستهداف الجمهور'],
+            content: `<p>نصوغ استراتيجيات تسويق مبنية على البيانات تزيد العائد على الاستثمار وتغذي النمو المستدام لعلامتك التجارية عبر كل القنوات الرقمية.</p>
+            <p>من تسويق المحتوى إلى الحملات المدفوعة، نوائم كل جهد مع أهداف عملك، ونتبع الأداء بدقة، ونحسّن لتقديم نتائج قابلة للقياس.</p>
+            <h3 class="font-bold text-lg mt-6 mb-2">منهجنا</h3>
+            <p>التسويق ليس تخميناً. ندرس جمهورك ومنافسيك وسوقك، ثم نبني استراتيجية متكاملة عبر كامل قناة التحويل — نجذب ونتفاعل ونحوّل العملاء إلى مناصرين أوفياء.</p>`
+        }
+    },
+    adCampaigns: {
+        icon: 'target', color: '#FB923C', bg: 'rgba(251,146,60,0.15)', glow: 'rgba(251,146,60,0.12)', glow2: 'rgba(0,212,255,0.08)',
+        en: {
+            title: 'Ad Campaigns', desc: 'Targeted advertising campaigns that reach the right audience at the right time.',
+            features: ['Multi-platform ad management', 'Precise audience targeting', 'Budget optimization', 'A/B testing & creative refinement', 'Real-time performance reporting'],
+            content: `<p>We design and manage targeted advertising campaigns that put your message in front of the right audience at the right time — maximizing every dollar of your budget.</p>
+            <p>From Google Ads to social platforms, we build data-backed campaigns, test creative continuously, and refine targeting to drive the best possible return.</p>
+            <h3 class="font-bold text-lg mt-6 mb-2">Our Edge</h3>
+            <p>Precision targeting, relentless optimization, and transparent real-time reporting. We treat your budget like our own and scale what works while cutting what doesn't.</p>`
+        },
+        ar: {
+            title: 'حملات إعلانية', desc: 'حملات إعلانية مستهدفة تصل إلى الجمهور المناسب في الوقت المناسب.',
+            features: ['إدارة إعلانات متعددة المنصات', 'استهداف جمهور دقيق', 'تحسين الميزانية', 'اختبار A/B وتحسين الإبداع', 'تقارير أداء لحظية'],
+            content: `<p>نصمم وندير حملات إعلانية مستهدفة تضع رسالتك أمام الجمهور المناسب في الوقت المناسب — محققين أقصى استفادة من كل جزء من ميزانيتك.</p>
+            <p>من إعلانات Google إلى منصات التواصل الاجتماعي، نبني حملات مبنية على البيانات، ونختبر الإبداع باستمرار، ونحسّن الاستهداف لتحقيق أفضل عائد ممكن.</p>
+            <h3 class="font-bold text-lg mt-6 mb-2">ما يميزنا</h3>
+            <p>استهداف دقيق، وتحسين مستمر، وتقارير لحظية شفافة. نتعامل مع ميزانيتك وكأنها ملكنا، ونضاعف ما ينجح ونستبعد ما لا يجدي.</p>`
+        }
+    },
+    socialMedia: {
+        icon: 'share-2', color: '#60A5FA', bg: 'rgba(96,165,250,0.15)', glow: 'rgba(96,165,250,0.12)', glow2: 'rgba(255,79,216,0.08)',
+        en: {
+            title: 'Social Media', desc: 'Engaging social strategies that build community and amplify your brand.',
+            features: ['Social content & calendar planning', 'Community management', 'Brand voice & creative design', 'Growth & engagement strategy', 'Analytics & audience insights'],
+            content: `<p>We build engaging social media strategies that create a genuine community around your brand and turn followers into loyal customers.</p>
+            <p>From content calendars to community management, we craft a consistent brand voice, design scroll-stopping visuals, and grow your presence with purpose.</p>
+            <h3 class="font-bold text-lg mt-6 mb-2">Our Approach</h3>
+            <p>Social media is about connection. We listen to your audience, create value-driven content they love, and use data insights to continuously grow engagement and reach.</p>`
+        },
+        ar: {
+            title: 'التواصل الاجتماعي', desc: 'استراتيجيات اجتماعية جذابة تبني مجتمعاً وتضخّم حضور علامتك التجارية.',
+            features: ['تخطيط المحتوى والتقويم الاجتماعي', 'إدارة المجتمع', 'هوية العلامة والتصميم الإبداعي', 'استراتيجية النمو والتفاعل', 'تحليلات ورؤى الجمهور'],
+            content: `<p>نبني استراتيجيات تواصل اجتماعي جذابة تخلق مجتمعاً حقيقياً حول علامتك التجارية وتحوّل المتابعين إلى عملاء أوفياء.</p>
+            <p>من التقويمات المحتوى إلى إدارة المجتمع، نصوغ صوتاً ثابتاً للعلامة، ونصمم محتوى بصرياً لافتاً، وننمي حضورك بهدف واضح.</p>
+            <h3 class="font-bold text-lg mt-6 mb-2">منهجنا</h3>
+            <p>التواصل الاجتماعي يعني التواصل الإنساني. نستمع إلى جمهورك، ونصنع محتوى قيماً يحبه، ونستخدم رؤى البيانات لتنمية التفاعل والوصول باستمرار.</p>`
+        }
+    },
+    brandIdentity: {
+        icon: 'pen-tool', color: '#F472B6', bg: 'rgba(244,114,182,0.15)', glow: 'rgba(244,114,182,0.12)', glow2: 'rgba(124,58,237,0.08)',
+        en: {
+            title: 'Brand Identity', desc: 'Memorable brand identities that resonate with your target audience.',
+            features: ['Logo & visual identity design', 'Brand guidelines & color systems', 'Typography & design assets', 'Brand storytelling & messaging', 'Consistent multi-channel presence'],
+            content: `<p>We craft memorable brand identities that capture who you are and resonate deeply with your target audience — turning your brand into a recognizable, trusted presence.</p>
+            <p>From logos and color systems to messaging and guidelines, we build a complete identity that looks and feels consistent across every channel.</p>
+            <h3 class="font-bold text-lg mt-6 mb-2">Why It Matters</h3>
+            <p>A strong identity is your silent ambassador. We blend design and storytelling to create a brand your customers remember, trust, and choose again and again.</p>`
+        },
+        ar: {
+            title: 'هوية العلامة التجارية', desc: 'هويات تجارية لا تُنسى تتردد صداها لدى جمهورك المستهدف.',
+            features: ['تصميم الشعار والهوية البصرية', 'دليل العلامة وأنظمة الألوان', 'الخطوط والأصول التصميمية', 'السرد القصصي ورسائل العلامة', 'حضور متسق متعدد القنوات'],
+            content: `<p>نصوغ هويات تجارية لا تُنسى تعبّر عمّا أنت عليه وتتردد في نفوس جمهورك المستهدف — محولين علامتك إلى حضور معروف وموثوق.</p>
+            <p>من الشعارات وأنظمة الألوان إلى الرسائل والأدلة، نبني هوية متكاملة تبدو متسقة عبر كل قناة.</p>
+            <h3 class="font-bold text-lg mt-6 mb-2">لماذا هي مهمة؟</h3>
+            <p>الهوية القوية هي سفيرك الصامت. نمزج بين التصميم والسرد القصصي لنصنع علامة يتذكرها عملاؤك، ويثقون بها، ويختارونها مرة بعد أخرى.</p>`
+        }
+    }
+};
+
+let currentLang = localStorage.getItem('siteLang') || 'en';
+const params = new URLSearchParams(window.location.search);
+const serviceId = params.get('id') || 'webDesign';
+
+function applyLang() {
+    const data = SERVICES[serviceId];
+    const t = data[currentLang];
+    document.documentElement.lang = currentLang;
+    document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+    document.title = t.title + ' — Dalia Ahmed Digital Agency';
+    document.getElementById('serviceTitle').textContent = t.title;
+    document.getElementById('serviceDesc').textContent = t.desc;
+    document.getElementById('contentBody').innerHTML = `
+        <div class="grid md:grid-cols-2 gap-4 mb-8">
+            ${t.features.map(f => `<div class="feature-item"><i data-lucide="check-circle-2" class="w-5 h-5" style="color:${data.color}"></i><span>${f}</span></div>`).join('')}
+        </div>
+        <div>${t.content}</div>`;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const map = { back: currentLang === 'ar' ? 'العودة إلى الخدمات' : 'Back to Services', badge: currentLang === 'ar' ? 'خدمتنا' : 'Our Service', ctaTitle: currentLang === 'ar' ? 'هل أنت مستعد للبدء؟' : 'Ready to Get Started?', ctaText: currentLang === 'ar' ? 'دعنا نحوّل احتياجاتك إلى واقع. تواصل معنا اليوم.' : "Let's bring your service needs to life. Get in touch with us today.", ctaWhatsapp: currentLang === 'ar' ? 'ابدأ مشروعك' : 'Start Your Project' };
+        if (map[el.getAttribute('data-i18n')]) el.textContent = map[el.getAttribute('data-i18n')];
+    });
+    document.getElementById('langToggle').innerHTML = currentLang === 'ar' ? '<span>EN</span><i data-lucide="globe" class="w-4 h-4"></i>' : '<span>العربية</span><i data-lucide="globe" class="w-4 h-4"></i>';
+    try { lucide.createIcons(); } catch(e) {}
+}
+
+document.getElementById('langToggle').addEventListener('click', () => {
+    currentLang = currentLang === 'ar' ? 'en' : 'ar';
+    localStorage.setItem('siteLang', currentLang);
+    applyLang();
+});
+
+applyLang();
+
+// theme
+const savedTheme = localStorage.getItem('siteTheme');
+if (savedTheme === 'light') {
+    document.documentElement.classList.remove('dark');
+    document.documentElement.classList.add('light');
+}
+
+// scroll progress
+window.addEventListener('scroll', () => {
+    const st = window.scrollY;
+    const dh = document.documentElement.scrollHeight - window.innerHeight;
+    document.getElementById('scrollProgress').style.width = (dh > 0 ? (st / dh) * 100 : 0) + '%';
+});
+// mouse glow
+document.addEventListener('mousemove', (e) => {
+    document.getElementById('mouseGlow').style.left = e.clientX + 'px';
+    document.getElementById('mouseGlow').style.top = e.clientY + 'px';
+});
+// loader
+setTimeout(() => document.getElementById('loader').classList.add('hidden'), 600);
+// reveal
+const io = new IntersectionObserver((entries) => entries.forEach(en => { if (en.isIntersecting) en.target.classList.add('visible'); }), { threshold: 0.1 });
+document.querySelectorAll('.fade-in-up').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

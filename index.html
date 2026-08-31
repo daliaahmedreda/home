@@ -1,0 +1,1902 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dalia Ahmed — Digital Agency | Web Design, Development & Marketing</title>
+    <meta name="description" content="Dalia Ahmed Digital Agency — We create stunning websites, powerful digital solutions, and high-converting marketing campaigns that help brands grow faster.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"></noscript>
+    <script src="assets/js/tailwind.js"></script>
+    <script src="assets/js/lucide.min.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
+                        space: ['Space Grotesk', 'sans-serif'],
+                        cairo: ['Cairo', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#7C3AED',
+                        secondary: '#00D4FF',
+                        accent: '#FF4FD8',
+                        dark: {
+                            900: '#050816',
+                            800: '#0F172A',
+                            700: '#111827',
+                            600: '#1E293B',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        ::selection { background: #7C3AED; color: white; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #050816; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #7C3AED, #00D4FF); border-radius: 3px; }
+
+        /* Loading Screen */
+        #loader {
+            position: fixed; inset: 0; z-index: 9999;
+            background: #050816;
+            display: flex; align-items: center; justify-content: center; flex-direction: column;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        #loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        #loader { animation: loaderAutoHide 1s ease 4s forwards; }
+        @keyframes loaderAutoHide { to { opacity: 0; visibility: hidden; pointer-events: none; } }
+        .loader-ring {
+            width: 60px; height: 60px; border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: #7C3AED; border-right-color: #00D4FF;
+            animation: loaderSpin 1s linear infinite;
+        }
+        .loader-ring-inner {
+            width: 40px; height: 40px; border-radius: 50%;
+            border: 3px solid transparent;
+            border-bottom-color: #FF4FD8; border-left-color: #7C3AED;
+            animation: loaderSpin 0.6s linear infinite reverse;
+            position: absolute;
+        }
+        @keyframes loaderSpin { to { transform: rotate(360deg); } }
+
+        /* Scroll Progress */
+        #scrollProgress {
+            position: fixed; top: 0; left: 0; height: 3px; z-index: 10001;
+            background: linear-gradient(90deg, #7C3AED, #00D4FF, #FF4FD8);
+            transition: width 0.1s linear; width: 0%;
+        }
+
+        /* Mouse Glow */
+        #mouseGlow {
+            position: fixed; width: 400px; height: 400px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(124,58,237,0.08) 0%, transparent 70%);
+            pointer-events: none; z-index: 1; transform: translate(-50%, -50%);
+            transition: left 0.3s ease-out, top 0.3s ease-out;
+        }
+
+        /* Glass Card */
+        .glass-card {
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 1.5rem;
+            transition: all 0.5s cubic-bezier(0.4,0,0.2,1);
+        }
+        .glass-card:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(124,58,237,0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 25px 60px -15px rgba(124,58,237,0.2), 0 0 30px rgba(124,58,237,0.1);
+        }
+
+        /* Neon border */
+        .neon-border {
+            position: relative; overflow: hidden;
+        }
+        .neon-border::before {
+            content: ''; position: absolute; inset: -2px;
+            background: conic-gradient(from 0deg, #7C3AED, #00D4FF, #FF4FD8, #7C3AED);
+            border-radius: inherit; z-index: -1; opacity: 0;
+            transition: opacity 0.5s ease; animation: neonRotate 4s linear infinite;
+        }
+        .neon-border:hover::before { opacity: 1; }
+        .neon-border::after {
+            content: ''; position: absolute; inset: 1px;
+            background: rgba(5,8,22,0.95); border-radius: inherit; z-index: -1;
+        }
+        @keyframes neonRotate { to { transform: rotate(360deg); } }
+
+        /* Typing cursor */
+        .typing-cursor {
+            display: inline-block; width: 3px; height: 1.2em;
+            background: linear-gradient(180deg, #7C3AED, #00D4FF);
+            margin-left: 4px; vertical-align: middle;
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+        /* Floating animation */
+        @keyframes float {
+            0%,100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-15px) rotate(2deg); }
+            66% { transform: translateY(10px) rotate(-1deg); }
+        }
+        @keyframes floatSlow {
+            0%,100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Pulse for WhatsApp */
+        @keyframes whatsappPulse {
+            0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.5); }
+            70% { box-shadow: 0 0 0 20px rgba(37,211,102,0); }
+            100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
+        }
+
+        /* Glow text */
+        .glow-text {
+            text-shadow: 0 0 40px rgba(124,58,237,0.5), 0 0 80px rgba(124,58,237,0.3);
+        }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #7C3AED, #00D4FF, #FF4FD8);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .gradient-text-alt {
+            background: linear-gradient(135deg, #00D4FF, #7C3AED);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Particle */
+        .particle {
+            position: absolute; border-radius: 50%; pointer-events: none;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Fade in up animation */
+        .fade-in-up {
+            opacity: 0; transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4,0,0.2,1);
+        }
+        .fade-in-up.visible {
+            opacity: 1; transform: translateY(0);
+        }
+        /* Fallback: show content after loader hides even if JS fails */
+        @keyframes showFallback { to { opacity: 1; transform: translateY(0); } }
+        .fade-in-up { animation: showFallback 0s ease 5s forwards; }
+
+        /* Scale in */
+        .scale-in {
+            opacity: 0; transform: scale(0.9);
+            transition: all 0.6s cubic-bezier(0.4,0,0.2,1);
+        }
+        .scale-in.visible {
+            opacity: 1; transform: scale(1);
+        }
+        /* Fallback: show scale-in content after loader hides even if JS fails */
+        @keyframes showScaleFallback { to { opacity: 1; transform: scale(1); } }
+        .scale-in { animation: showScaleFallback 0s ease 5s forwards; }
+
+        /* Timeline */
+        .timeline-line {
+            position: absolute; left: 50%; top: 0; bottom: 0; width: 2px;
+            background: linear-gradient(180deg, #7C3AED, #00D4FF, #FF4FD8);
+            transform: translateX(-50%);
+        }
+        @media (max-width: 768px) {
+            .timeline-line { left: 24px; }
+        }
+
+        /* Testimonial slider */
+        .testimonial-track {
+            display: flex; transition: transform 0.6s cubic-bezier(0.4,0,0.2,1);
+        }
+
+        /* Portfolio filter active */
+        .filter-btn.active {
+            background: linear-gradient(135deg, #7C3AED, #00D4FF);
+            color: white; border-color: transparent;
+        }
+
+        /* Nav active link */
+        .nav-link.active { color: #7C3AED; }
+
+        /* Light mode styles */
+        html.light body { background: #F8FAFC !important; color: #0F172A !important; }
+        html.light .glass-card {
+            background: rgba(255,255,255,0.6) !important;
+            border-color: rgba(0,0,0,0.08) !important;
+        }
+        html.light .glass-card:hover {
+            background: rgba(255,255,255,0.8) !important;
+            border-color: rgba(124,58,237,0.3) !important;
+        }
+        html.light .dark\:bg-dark-900 { background: #F8FAFC !important; }
+        html.light .dark\:text-white { color: #0F172A !important; }
+        html.light .dark\:text-gray-400 { color: #64748B !important; }
+        html.light .dark\:text-gray-500 { color: #64748B !important; }
+        html.light .neon-border::after { background: rgba(255,255,255,0.9) !important; }
+        html.light #mouseGlow { background: radial-gradient(circle, rgba(124,58,237,0.04) 0%, transparent 70%); }
+        html.light .dark\:bg-dark-800 { background: #E2E8F0 !important; }
+
+        /* Smooth scroll */
+        html { scroll-behavior: smooth; }
+
+        /* Hero mockup */
+        .hero-mockup {
+            background: linear-gradient(135deg, rgba(124,58,237,0.2), rgba(0,212,255,0.1));
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 1rem; overflow: hidden;
+            animation: floatSlow 6s ease-in-out infinite;
+        }
+
+        /* Counter glow */
+        .counter-glow {
+            text-shadow: 0 0 30px rgba(124,58,237,0.4), 0 0 60px rgba(0,212,255,0.2);
+        }
+
+        /* CTA animated bg */
+        @keyframes ctaGlow {
+            0%,100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .cta-animated-bg {
+            background: linear-gradient(135deg, #7C3AED, #00D4FF, #FF4FD8, #7C3AED);
+            background-size: 300% 300%;
+            animation: ctaGlow 8s ease infinite;
+        }
+
+        /* Mobile menu */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+        }
+        .mobile-menu.open { transform: translateX(0); }
+
+        html[dir="rtl"] .svc-arrow { transform: rotate(180deg); }
+        .service-details-btn .svc-arrow { transition: transform 0.3s ease; }
+        .service-details-btn:hover .svc-arrow { transform: translateX(4px); }
+        html[dir="rtl"] .service-details-btn:hover .svc-arrow { transform: translateX(-4px) rotate(180deg); }
+        .service-long-body { display: none; }
+        #footerPhone { unicode-bidi: isolate; direction: ltr; }
+    </style>
+</head>
+<body class="font-inter bg-dark-900 text-white overflow-x-hidden">
+
+<!-- Loading Screen -->
+<div id="loader">
+    <div class="relative flex items-center justify-center">
+        <div class="loader-ring"></div>
+        <div class="loader-ring-inner"></div>
+    </div>
+    <p class="mt-6 font-space text-sm tracking-widest uppercase text-gray-400" data-i18n="loader.text">Loading Experience</p>
+</div>
+
+<!-- Scroll Progress -->
+<div id="scrollProgress"></div>
+
+<!-- Mouse Glow -->
+<div id="mouseGlow"></div>
+
+<!-- ====== NAVBAR ====== -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-[1000] transition-all duration-500">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-2 group">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center font-poppins font-bold text-white text-lg group-hover:shadow-[0_0_20px_rgba(124,58,237,0.5)] transition-shadow duration-300">D</div>
+            <span class="font-poppins font-bold text-xl tracking-tight">DALIA AHMED</span>
+        </a>
+
+        <!-- Desktop Links -->
+        <div class="hidden lg:flex items-center gap-8">
+            <a href="#home" class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors" data-i18n="nav.home">Home</a>
+            <a href="#services" class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors" data-i18n="nav.services">Services</a>
+            <a href="#about" class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors" data-i18n="nav.about">About</a>
+            <a href="#portfolio" class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors" data-i18n="nav.portfolio">Portfolio</a>
+            <a href="#process" class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors" data-i18n="nav.process">Process</a>
+            <a href="#testimonials" class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors" data-i18n="nav.testimonials">Testimonials</a>
+            <a href="#contact" class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors" data-i18n="nav.contact">Contact</a>
+        </div>
+
+        <!-- Right side -->
+        <div class="flex items-center gap-4">
+            <!-- Dark/Light Toggle -->
+            <button id="themeToggle" class="w-10 h-10 rounded-xl glass-card flex items-center justify-center hover:scale-110 transition-transform" aria-label="Toggle theme">
+                <i data-lucide="moon" class="w-4 h-4 dark-icon"></i>
+                <i data-lucide="sun" class="w-4 h-4 light-icon hidden"></i>
+            </button>
+            <!-- CTA -->
+            <button id="langToggle" class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm font-semibold text-white hover:border-primary/30 transition-all duration-300" aria-label="Toggle language">
+                <span>العربية</span>
+                <i data-lucide="globe" class="w-4 h-4"></i>
+            </button>
+            <a href="#contact" class="hidden md:inline-flex px-6 py-2.5 rounded-full bg-gradient-to-r from-primary to-secondary text-white text-sm font-semibold hover:shadow-[0_0_30px_rgba(124,58,237,0.4)] transition-all duration-300 hover:scale-105" data-i18n="cta.getStarted">
+                Get Started
+            </a>
+            <!-- Mobile Menu Button -->
+            <button id="menuToggle" class="lg:hidden w-10 h-10 rounded-xl glass-card flex items-center justify-center" aria-label="Menu">
+                <i data-lucide="menu" class="w-5 h-5"></i>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobileMenu" class="mobile-menu fixed inset-0 z-[1001] bg-dark-900/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8">
+    <button id="menuClose" class="absolute top-6 right-6 w-10 h-10 rounded-xl glass-card flex items-center justify-center">
+        <i data-lucide="x" class="w-5 h-5"></i>
+    </button>
+    <button id="mobileLangToggle" class="px-5 py-3 rounded-full glass-card text-base font-semibold text-white hover:border-primary/30 transition-all duration-300" aria-label="Toggle language">
+        العربية
+    </button>
+    <a href="#home" class="mobile-nav text-2xl font-poppins font-semibold hover:text-primary transition-colors" data-i18n="nav.home">Home</a>
+    <a href="#services" class="mobile-nav text-2xl font-poppins font-semibold hover:text-primary transition-colors" data-i18n="nav.services">Services</a>
+    <a href="#about" class="mobile-nav text-2xl font-poppins font-semibold hover:text-primary transition-colors" data-i18n="nav.about">About</a>
+    <a href="#portfolio" class="mobile-nav text-2xl font-poppins font-semibold hover:text-primary transition-colors" data-i18n="nav.portfolio">Portfolio</a>
+    <a href="#process" class="mobile-nav text-2xl font-poppins font-semibold hover:text-primary transition-colors" data-i18n="nav.process">Process</a>
+    <a href="#testimonials" class="mobile-nav text-2xl font-poppins font-semibold hover:text-primary transition-colors" data-i18n="nav.testimonials">Testimonials</a>
+    <a href="#contact" class="mobile-nav text-2xl font-poppins font-semibold hover:text-primary transition-colors" data-i18n="nav.contact">Contact</a>
+    <a href="#contact" class="mt-4 px-8 py-3 rounded-full bg-gradient-to-r from-primary to-secondary text-white font-semibold" data-i18n="cta.getStarted">Get Started</a>
+</div>
+
+<!-- ====== HERO SECTION ====== -->
+<section id="home" class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+    <!-- Animated bg gradients -->
+    <div class="absolute inset-0">
+        <div class="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] animate-pulse"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-secondary/8 rounded-full blur-[100px] animate-pulse" style="animation-delay:2s"></div>
+        <div class="absolute top-1/2 left-1/2 w-[400px] h-[400px] bg-accent/5 rounded-full blur-[80px] animate-pulse" style="animation-delay:4s"></div>
+    </div>
+
+    <!-- Particles -->
+    <div id="particles" class="absolute inset-0 pointer-events-none"></div>
+
+    <!-- Grid overlay -->
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 60px 60px;"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-12 items-center">
+        <!-- Left content -->
+        <div class="fade-in-up">
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-8 text-sm">
+                <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                <span class="text-gray-300" data-i18n="hero.available">Available for new projects</span>
+            </div>
+
+            <!-- Main Headline -->
+            <h1 class="font-poppins font-bold text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.1] tracking-tight mb-6" data-i18n="hero.title">
+                Transform Your Business Into a
+                <span class="gradient-text"> Digital Success Story</span>
+            </h1>
+
+            <!-- Typing Quotes -->
+            <div class="h-16 md:h-12 mb-6 flex items-start md:items-center">
+                <p class="font-space text-lg md:text-xl text-gray-300">
+                    <span id="typingText" class="text-secondary"></span>
+                    <span class="typing-cursor"></span>
+                </p>
+            </div>
+
+            <!-- Subtitle -->
+            <p class="text-gray-400 text-lg leading-relaxed max-w-xl mb-10" data-i18n="hero.subtitle">
+                We create stunning websites, powerful digital solutions, and high-converting marketing campaigns that help brands grow faster.
+            </p>
+
+            <!-- Buttons -->
+            <div class="flex flex-wrap gap-4">
+                <a href="#contact" class="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-primary to-secondary text-white font-semibold text-lg hover:shadow-[0_0_40px_rgba(124,58,237,0.4)] transition-all duration-300 hover:scale-105">
+                    <span data-i18n="cta.getStarted">Get Started</span>
+                    <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+                <a href="#portfolio" class="inline-flex items-center gap-2 px-8 py-4 rounded-full glass-card text-white font-semibold text-lg hover:border-primary/30 transition-all duration-300" data-i18n="cta.viewPortfolio">
+                    View Portfolio
+                </a>
+            </div>
+
+            <!-- Trust badges -->
+            <div class="flex items-center gap-8 mt-12">
+                <div class="text-center">
+                    <p class="font-poppins font-bold text-2xl gradient-text">100+</p>
+                    <p class="text-gray-500 text-xs uppercase tracking-wider" data-i18n="hero.trust.projects">Projects</p>
+                </div>
+                <div class="w-px h-10 bg-white/10"></div>
+                <div class="text-center">
+                    <p class="font-poppins font-bold text-2xl gradient-text">95%</p>
+                    <p class="text-gray-500 text-xs uppercase tracking-wider" data-i18n="hero.trust.satisfaction">Satisfaction</p>
+                </div>
+                <div class="w-px h-10 bg-white/10"></div>
+                <div class="text-center">
+                    <p class="font-poppins font-bold text-2xl gradient-text">5+</p>
+                    <p class="text-gray-500 text-xs uppercase tracking-wider" data-i18n="hero.trust.years">Years</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: Glass Mockup -->
+        <div class="hidden lg:flex justify-center fade-in-up" style="transition-delay:0.3s">
+            <div class="relative">
+                <!-- Main mockup -->
+                <div class="hero-mockup w-[420px] h-[340px] p-6">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-3 h-3 rounded-full bg-red-400"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-400"></div>
+                        <div class="flex-1 h-6 rounded-full bg-white/5 ml-3"></div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="h-8 w-3/4 rounded-lg bg-gradient-to-r from-primary/20 to-secondary/20"></div>
+                        <div class="h-4 w-full rounded bg-white/5"></div>
+                        <div class="h-4 w-5/6 rounded bg-white/5"></div>
+                        <div class="h-4 w-2/3 rounded bg-white/5"></div>
+                        <div class="flex gap-3 mt-4">
+                            <div class="h-10 w-28 rounded-full bg-gradient-to-r from-primary to-secondary"></div>
+                            <div class="h-10 w-28 rounded-full bg-white/10"></div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-3 mt-4">
+                            <div class="h-20 rounded-xl bg-white/5"></div>
+                            <div class="h-20 rounded-xl bg-white/5"></div>
+                            <div class="h-20 rounded-xl bg-white/5"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Floating elements -->
+                <div class="absolute -top-8 -right-8 w-24 h-24 rounded-2xl glass-card flex items-center justify-center" style="animation: float 5s ease-in-out infinite">
+                    <i data-lucide="code-2" class="w-10 h-10 text-primary"></i>
+                </div>
+                <div class="absolute -bottom-6 -left-10 w-20 h-20 rounded-2xl glass-card flex items-center justify-center" style="animation: float 4s ease-in-out infinite; animation-delay: 1s">
+                    <i data-lucide="palette" class="w-8 h-8 text-accent"></i>
+                </div>
+                <div class="absolute top-1/2 -right-16 w-16 h-16 rounded-xl glass-card flex items-center justify-center" style="animation: float 6s ease-in-out infinite; animation-delay: 2s">
+                    <i data-lucide="zap" class="w-6 h-6 text-secondary"></i>
+                </div>
+
+                <!-- Glow ring -->
+                <div class="absolute -inset-8 rounded-full border border-primary/10 animate-pulse pointer-events-none"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
+        <span class="text-gray-500 text-xs uppercase tracking-widest" data-i18n="hero.scroll">Scroll</span>
+        <i data-lucide="chevron-down" class="w-4 h-4 text-gray-500"></i>
+    </div>
+</section>
+
+<!-- ====== SERVICES SECTION ====== -->
+<section id="services" class="relative py-32 overflow-hidden">
+    <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px]"></div>
+    <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-secondary/5 rounded-full blur-[100px]"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6">
+        <!-- Section header -->
+        <div class="text-center mb-20 fade-in-up">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-6 text-sm">
+                <i data-lucide="sparkles" class="w-4 h-4 text-primary"></i>
+                <span class="text-gray-300" data-i18n="sections.servicesLabel">Our Services</span>
+            </div>
+            <h2 class="font-poppins font-bold text-3xl md:text-5xl tracking-tight mb-6" data-i18n="sections.servicesTitle">
+                Premium Digital <span class="gradient-text">Solutions</span>
+            </h2>
+            <p class="text-gray-400 text-lg max-w-2xl mx-auto" data-i18n="sections.servicesText">
+                We offer a comprehensive suite of digital services designed to elevate your brand and accelerate your growth.
+            </p>
+        </div>
+
+        <!-- Services Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Service 1 -->
+            <div id="webDesignAboutCard" class="glass-card neon-border p-8 group fade-in-up text-right" style="direction: rtl; font-family: 'Cairo', sans-serif;">
+                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center mb-6 group-hover:shadow-[0_0_30px_rgba(124,58,237,0.3)] transition-shadow duration-500">
+                    <i data-lucide="monitor" class="w-7 h-7 text-primary"></i>
+                </div>
+                <h3 class="font-poppins font-semibold text-xl mb-3" style="direction: ltr; font-family: 'Poppins', sans-serif;" data-i18n="services.webDesign.title">Web Design</h3>
+                <p class="text-gray-400 text-sm leading-relaxed" data-i18n="services.webDesign.desc">Stunning, responsive designs that captivate visitors and create lasting impressions.</p>
+                <a href="service.html?id=webDesign" class="inline-flex items-center gap-2 mt-6 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary to-secondary text-white text-sm font-semibold hover:shadow-[0_0_25px_rgba(124,58,237,0.4)] transition-all duration-300 hover:scale-105">
+                    <span data-i18n-lbl="details">Read More</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4 svc-arrow"></i>
+                </a>
+                <div class="mt-6 border-t border-white/10 pt-6 space-y-6 service-long-body" data-service="webDesign" data-i18n="aboutCard.body">
+                    <p>We build bridges between ideas and digital reality.</p>
+                    <p>In a world where digital transformation is accelerating, we believe a website is not just pages on the internet — it is the true mirror of your brand and the first point of contact with your audience. That's why we founded Web Design to deliver a different experience in the world of web design; an experience that combines visual creativity, masterful coding, and a deep understanding of client needs.</p>
+                    <p>We are not just designers — we are success partners who work side by side with our clients to turn their digital dreams into impactful interactive platforms that reflect their identity, strengthen their presence, and achieve their business goals.</p>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2 text-white">Our Vision: Design That Inspires and Impacts</h4>
+                        <p>We aspire to be the first destination in the Middle East for anyone seeking professional web design that combines:</p>
+                        <ul class="list-disc list-inside mt-2 space-y-1">
+                            <li>Modern aesthetics that captivate attention.</li>
+                            <li>Ease of use that makes the experience smooth and enjoyable.</li>
+                            <li>Strong technical performance that ensures unmatched speed and security.</li>
+                        </ul>
+                        <p class="mt-2">We believe good design is design that goes unnoticed because it feels natural — yet it is the product of thousands of hours of thinking and innovation. We always strive for every website we deliver to be a work of art and a marketing tool at the same time.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2 text-white">Our Mission: We Build Experiences, Not Just Websites</h4>
+                        <p>Our mission is simple and clear: turn your needs into innovative digital solutions with full commitment to quality, precision, and meeting deadlines. We put our client at the heart of every design decision, listen to their ideas, and translate them into interactive interfaces that maximize value for the end user.</p>
+                        <p class="mt-2">We believe every project is unique, so we offer tailored solutions that fit your business size, your field, and your future vision. Whether you are a startup, an established organization, or an individual launching your digital identity, we are here to support you every step of the way.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2 text-white">Our Team: Expertise, Passion, and Creativity</h4>
+                        <p>The Web Design team is made up of elite designers, developers, and UX/UI experts united by a single passion: crafting standout digital content. Every team member has a rich background in their field and keeps up with the latest technologies and trends in web design.</p>
+                        <ul class="list-disc list-inside mt-2 space-y-1">
+                            <li>Designers create visual identities that express who you are.</li>
+                            <li>Developers turn designs into clean, fast code compatible with all devices.</li>
+                            <li>UX experts ensure every visitor to your site has an unforgettable experience.</li>
+                            <li>Support team stays in constant contact to guarantee your full satisfaction.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2 text-white">Why Us? (Our Keys of Excellence)</h4>
+                        <ul class="space-y-1">
+                            <li>? Exclusive, innovative designs — we don't copy ready-made templates; we build a design that's uniquely yours from scratch.</li>
+                            <li>? Exceptional technical performance — our sites are fast, secure, and SEO-optimized.</li>
+                            <li>? Fully responsive across all devices — your site looks perfect on phones, tablets, and desktops.</li>
+                            <li>? Commitment to deadlines and quality — we set a clear timeline and stick to it, delivering polished work.</li>
+                            <li>? Ongoing technical support — we don't leave you after delivery; we provide follow-up and updates to keep your site outstanding.</li>
+                            <li>? Competitive pricing — the best value for a fair price suitable for everyone.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2 text-white">Success Partnerships</h4>
+                        <p>We've worked with more than 200 clients across various fields: e-commerce stores, educational platforms, real estate companies, restaurants, medical clinics, blogs, and government and private institutions. Every project was a new success story, and every client became part of the Web Design family.</p>
+                        <p class="mt-2">We're proud that a large percentage of our clients return to us to upgrade their sites or launch new projects — the biggest proof of their trust in us and the quality we deliver.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2 text-white">Our Future Together</h4>
+                        <p>At Web Design, we don't view projects as mere contracts; we see them as the start of a long-term partnership. We're delighted to watch our clients grow and evolve, and to be part of their journey toward digital success.</p>
+                        <p class="mt-2">If you're looking for:</p>
+                        <ul class="list-disc list-inside mt-2 space-y-1">
+                            <li>A new website design that expresses your identity.</li>
+                            <li>Redesigning your current website to refresh and upgrade it.</li>
+                            <li>A digital consultation to improve your site's performance and increase sales.</li>
+                        </ul>
+                        <p class="mt-2">Then you're in the right place.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2 text-white">Contact Us and Start Your Digital Journey</h4>
+                        <p>Don't postpone your dream — the opportunity is right now to own a professional website worthy of your ambition. The Web Design team awaits you for a free consultation, to discuss your ideas, and turn them into reality.</p>
+                        <p class="mt-2 font-semibold text-white">Together we build an unforgettable digital presence.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 2 -->
+            <div id="webDevelopmentAboutCard" class="glass-card neon-border p-8 group fade-in-up text-right" style="direction: rtl; font-family: 'Cairo', sans-serif;">
+                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-secondary/20 to-secondary/5 flex items-center justify-center mb-6 group-hover:shadow-[0_0_30px_rgba(0,212,255,0.3)] transition-shadow duration-500">
+                    <i data-lucide="code-2" class="w-7 h-7 text-secondary"></i>
+                </div>
+                <h3 class="font-poppins font-semibold text-xl mb-3" style="direction: ltr; font-family: 'Poppins', sans-serif;" data-i18n="services.webDevelopment.title">Web Development</h3>
+                <p class="text-gray-400 text-sm leading-relaxed" data-i18n="services.webDevelopment.desc">Robust, scalable web applications built with cutting-edge technologies.</p>
+                <a href="service.html?id=webDevelopment" class="inline-flex items-center gap-2 mt-6 px-5 py-2.5 rounded-full bg-gradient-to-r from-secondary to-accent text-white text-sm font-semibold hover:shadow-[0_0_25px_rgba(0,212,255,0.4)] transition-all duration-300 hover:scale-105">
+                    <span data-i18n-lbl="details">Read More</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4 svc-arrow"></i>
+                </a>
+                <div class="mt-6 border-t border-white/10 pt-6 space-y-6 service-long-body" data-service="webDevelopment" data-i18n="devAboutCard.body">
+                    <p>Who We Are: Your Partners in Turning Ideas into Digital Reality</p>
+                    <p>In a digital world where change accelerates every day, a simple website is no longer enough; you need an interactive, fast, and secure digital identity that reflects the spirit of your brand and puts you ahead of the competition. At Web Development, we don't just build websites — we build integrated digital platforms that tell your story and serve your customers efficiently.</p>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2 text-white">Our Story: A Passion for Technology and Design Mastery</h4>
+                        <p>Our journey began years ago, when a team of creative engineers and UX/UI designers united around one vision: bridging the gap between attractive design and outstanding technical performance. We didn't want to be just a traditional software company; our ambition was to be the digital engine that drives businesses toward new horizons.</p>
+                        <p class="mt-2">We started as a small project passionate about solving technical problems, and soon grew into an integrated team of elite developers specializing in the latest web technologies — from front-end development with React and Vue.js, to building powerful, complex back-end systems using Node.js, Laravel, and Python.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2 text-white">Our Philosophy: Excellence Begins with Understanding Your Needs</h4>
+                        <p>At Web Development, we believe successful technology is the kind users don't feel — they only feel smooth performance and ease of use. That's why our philosophy rests on three core pillars:</p>
+                        <ul class="list-disc list-inside mt-2 space-y-1">
+                            <li>Deep understanding: Before we write a single line of code, we listen to you. We study your industry, your target audience, and your strategic goals, because a successful website is not just code — it's a tool for achieving tangible business goals.</li>
+                            <li>Technical excellence: We keep pace with the latest web technologies. We ensure your platforms are responsive, compatible with all devices, and SEO-optimized from day one, with the highest standards of security and protection.</li>
+                            <li>Partnership and support: Our relationship with clients doesn't end at project delivery. We believe in long-term relationships, so we provide continuous technical support and flexible development plans so your platform grows alongside your business.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2 text-white">Why Us? (Added Value)</h4>
+                        <p>In a market full of options, what makes you choose us?</p>
+                        <ul class="list-disc list-inside mt-2 space-y-1">
+                            <li>Custom solutions: We don't use ready-made templates. Every project we deliver is a unique artistic and technical piece, designed specifically to fit your identity and your specific needs.</li>
+                            <li>Multidisciplinary team: We're not just developers. Our team includes UX designers, data analysts, and cybersecurity specialists, ensuring your final product is complete in every aspect.</li>
+                            <li>Commitment to timelines: We know time is a key factor in any project's success. We stick to agreed delivery dates without compromising quality.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2 text-white">Look to the Future Through Our Eyes</h4>
+                        <p>We see every new project as an opportunity to make a real difference. Whether you're a startup dreaming of launching a revolutionary platform, an established brand seeking to renew its digital presence, or an e-commerce store aiming to expand into new markets, we are here to be the trusted technical partner you can rely on.</p>
+                        <p class="mt-2">We are proud of the projects we've completed and the trust our clients have placed in us, and we eagerly look forward to collaborating with you on your next project. Let's create something exceptional together.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2 text-white">Contact Us Today</h4>
+                        <p>Contact us today, and let's begin the journey of turning your vision into a stunning digital reality.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 3 -->
+            <div id="ecomAboutCard" class="glass-card neon-border p-8 group fade-in-up text-right" style="direction: rtl; font-family: 'Cairo', sans-serif;">
+                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center mb-6 group-hover:shadow-[0_0_30px_rgba(255,79,216,0.3)] transition-shadow duration-500">
+                    <i data-lucide="shopping-cart" class="w-7 h-7 text-accent"></i>
+                </div>
+                <h3 class="font-poppins font-semibold text-xl mb-3" style="direction: ltr; font-family: 'Poppins', sans-serif;" data-i18n="services.ecom.title">E-commerce Stores</h3>
+                <p class="text-gray-400 text-sm leading-relaxed" data-i18n="services.ecom.desc">High-converting online stores that turn browsers into loyal customers.</p>
+                <a href="service.html?id=ecom" class="inline-flex items-center gap-2 mt-6 px-5 py-2.5 rounded-full bg-gradient-to-r from-accent to-primary text-white text-sm font-semibold hover:shadow-[0_0_25px_rgba(255,79,216,0.4)] transition-all duration-300 hover:scale-105">
+                    <span data-i18n-lbl="details">Read More</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4 svc-arrow"></i>
+                </a>
+                <div class="mt-6 border-t border-white/10 pt-6 space-y-6 service-long-body" data-service="ecom" data-i18n="ecomAboutCard.body">
+                    <p>We are not just a store — we are a passion turning into reality in your hands.</p>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2 text-white">Opening Paragraph: (Defining the Essence)</h4>
+                        <p>In a world where the pace keeps accelerating and choices keep overlapping, our idea was born out of challenge. We did not create this online store to be just another face in a long list of sellers — we came to redefine the meaning of online shopping. We are here to say that the digital experience can be warm, personal, and trustworthy, exactly as you imagine it.</p>
+                        <p class="mt-2">We launched with a clear vision: providing exceptional products that meet your real needs, with a seamless shopping experience that makes you feel we live in your neighborhood, not behind a screen. We know that every product we place on our platform is not just a commodity, but a tool that improves your daily routine, adds a touch of beauty to your space, or is a gift carrying indescribable feelings. That is why we treat every detail as if it were meant for a member of our own family.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2 text-white">Chapter Two: (The Story of the Beginning and Passion)</h4>
+                        <p>Every successful journey begins with a story, and our story began with a simple observation: the gap between the product quality the customer deserves and what the market offers. We were a group of friends and partners, united by experience in various fields — design, marketing, and supply chains — but we all agreed on one thing: quality can never be sacrificed for price, and the customer experience can never be overlooked, no matter the circumstances.</p>
+                        <p class="mt-2">We decided to embark on this adventure not for quick profits, but to build a brand that lasts. We started by searching for the best sources, visiting exhibitions and factories, and testing thousands of products with our own hands before daring to show them to you. We did not rely only on attractive photos — we relied on real touch (as much as possible in our digital world), deep reading of every specification, and the constant question: "Would I buy this product for my mother or my friend?" If the answer was not a confident "yes", you will not find that product on our site.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2 text-white">Chapter Three: (Excellence in the World of E-commerce)</h4>
+                        <p>We know that trust is the most precious currency on the internet. On average, a customer browses more than 5 sites before making a purchase decision, and we work hard to make our site the last stop. How do we do that?</p>
+                        <p class="mt-2">Through transparency: we describe the product as it is, point out its flaws if any exist, and provide real photos from multiple angles.</p>
+                        <p class="mt-2">Through knowledge: we do not just sell — we educate. In every product you will find a usage guide, care tips, and answers to the frequently asked questions that may come to your mind.</p>
+                        <p class="mt-2">Through human service: our team is not just employees, but specialized consultants. When you contact us, you will find a human being who listens to you, understands your needs, and guides you to the best option that fits your budget and taste — not necessarily the most expensive one.</p>
+                        <p class="mt-2">We also believe that sustainability is not just a buzzword. We constantly work to reduce the carbon footprint of our shipments, use eco-friendly packaging materials as much as possible, and partner with shipping companies that share the same values. We believe our service to the customer extends to serving the planet we live on.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2 text-white">Chapter Four: (Our Firm Values)</h4>
+                        <p>These values are not just words on the wall of the site — they are the compass that guides every decision we make:</p>
+                        <ul class="list-disc list-inside mt-2 space-y-1">
+                            <li>Quality first: our products undergo strict inspection standards before reaching the warehouse, and again before shipping to you.</li>
+                            <li>Honesty with the customer: the delivery time we promise is a commitment, and the price you see is the best price we can offer without compromising quality.</li>
+                            <li>Continuous innovation: we listen to your feedback, develop our store, learn from our mistakes, and always strive to deliver a better experience than yesterday.</li>
+                            <li>The spirit of one team: we consider every customer a partner in our success journey, and every product we sell is the beginning of a relationship, not the end of a deal.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2 text-white">Chapter Five: (Our Ambition for the Future)</h4>
+                        <p>While we stand before you today with this platform, our eyes are set on distant horizons. We are not satisfied with being just a "store" — we aspire to be the destination of modern life. We are developing our technologies to deliver more interactive shopping experiences, such as augmented reality to try the product in your home before buying it, customer service powered by artificial intelligence but with a human touch, and a loyalty program that rewards every customer for their continued trust in us.</p>
+                        <p class="mt-2">Our ambition is to reach every home and to be the first choice when the customer searches for quality and reliability. We want to hear in the future: "I bought it from that store — I trust them completely." That is our true success.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2 text-white">Conclusion and an Invitation to Connect</h4>
+                        <p>In the end, we are here for you. This store is a reflection of your needs and aspirations. Do not hesitate to contact us with any question, inquiry, or even just a suggestion to improve our services. Our team is ready around the clock to serve you, because our success story is only complete when you are happy.</p>
+                        <p class="mt-2">Thank you for being part of this journey. Welcome to our family.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 4 -->
+            <div id="seoAboutCard" class="glass-card neon-border p-8 group fade-in-up text-right" style="direction: rtl; font-family: 'Cairo', sans-serif; transition-delay:0.3s">
+                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-400/20 to-green-400/5 flex items-center justify-center mb-6 group-hover:shadow-[0_0_30px_rgba(74,222,128,0.3)] transition-shadow duration-500">
+                    <i data-lucide="search" class="w-7 h-7 text-green-400"></i>
+                </div>
+                <h3 class="font-poppins font-semibold text-xl mb-3" style="direction: ltr; font-family: 'Poppins', sans-serif;" data-i18n="services.seo.title">SEO Optimization</h3>
+                <p class="text-gray-400 text-sm leading-relaxed" style="direction: ltr; text-align: left;" data-i18n="services.seo.desc">Dominate search rankings and drive organic traffic to your website.</p>
+                <a href="service.html?id=seo" class="inline-flex items-center gap-2 mt-6 px-5 py-2.5 rounded-full bg-gradient-to-r from-green-400 to-emerald-600 text-white text-sm font-semibold hover:shadow-[0_0_25px_rgba(74,222,128,0.4)] transition-all duration-300 hover:scale-105">
+                    <span data-i18n-lbl="details">Read More</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4 svc-arrow"></i>
+                </a>
+                <div class="mt-6 border-t border-white/10 pt-6 space-y-6 service-long-body" data-service="seo" data-i18n="seoAboutCard.body">
+                    <p class="font-bold text-xl text-white">About Us — Dalia Ahmed, Your Trusted Partner in the World of SEO</p><p>In a rapidly changing digital world, the most important question remains: how do you make your business appear at the top of search results? At Dalia Ahmed, we believe success is not a coincidence — it is the product of a well-crafted strategy, a deep understanding of search algorithms, and a genuine passion for delivering results. We didn't come to be just a service provider; we came to be the strategic partner that drives your business to the top.</p><p>Since our launch, we've kept one goal in mind: turning visitors into customers, and improving your digital visibility so it truly reflects the value of your brand. We don't follow off-the-shelf solutions; we design a unique roadmap for each client that fits the size of their business and resonates with their ambitious goals.</p><div><h4 class="font-bold text-lg mb-2 text-white">Our Vision &amp; Mission: We Build Bridges Between Your Business and Your Audience</h4><p class="font-semibold text-white">Our Vision:</p><p>To be the leading digital agency in the region, known to everyone as the "leader maker" in search engine optimization, and to contribute to building a digital environment where small and large businesses thrive alike — through innovative and transparent solutions.</p><p class="mt-2 font-semibold text-white">Our Mission:</p><p>To empower businesses to take control of their digital presence through organic, sustainable SEO strategies built on precise data analysis, a deep understanding of user behavior, and the creation of valuable content that audiences love and search engines reward. We are committed to transparency and to delivering clear reports that show you the impact of every effort we make.</p></div><div><h4 class="font-bold text-lg mb-2 text-white">Why Choose Dalia Ahmed?</h4><p>We won't promise you the #1 spot overnight — those are unrealistic promises. But we do promise you a genuine, sustainable growth journey. Here's what sets us apart:</p><p class="font-semibold text-white">1. Data-Driven Strategies</p><p>We don't rely on guesswork. Every decision we make, every word we write, and every link we build is grounded in deep data analysis. We study your competitors, analyze your keywords, and understand your audience to place you in the right spot, at the right time, with the right words.</p><p class="mt-2 font-semibold text-white">2. Unmatched Expertise</p><p>Our team is a blend of data analysts, content creators, link-building specialists, and web developers. This integrated expertise allows us to treat every aspect of SEO as one unified system, ensuring comprehensive and harmonious results.</p><p class="mt-2 font-semibold text-white">3. Total Transparency</p><p>With us, you'll find no hidden agendas. We deliver control dashboards and detailed monthly reports that show you where we stand, what we've accomplished, and what's next. You'll always stay up to date on every detail of your campaign.</p><p class="mt-2 font-semibold text-white">4. Continuous Optimization and Persistent Follow-Up</p><p>The world of SEO never stops, and Google's algorithms are constantly changing. That's why we don't just do the work and wait for results. We monitor your performance daily and adjust our plans based on market changes and competitor performance to ensure your continued growth and dominance.</p></div><div><h4 class="font-bold text-lg mb-2 text-white">Our Story: A Passionate Journey Into Digital</h4><p>Our story began in 2021, when our team noticed a big gap between what marketing agencies offered and what clients really needed. Most solutions were either too complicated, not transparent, or simply didn't deliver real results.</p><p class="mt-2">We decided to change the equation. We started as a small office, united by a passion for data science and content marketing. Over time, with every client's success, we grew and expanded — but we kept our core: sincerity in work, commitment to quality, and a constant pursuit of creativity.</p><p class="mt-2">Today, we proudly carry the trust of hundreds of clients who placed their digital future in our hands. Our story is a story of growth — not just of an agency, but of a true partnership with every client as we walk together on a long road toward success.</p></div><div><h4 class="font-bold text-lg mb-2 text-white">Our Core SEO Services</h4><p>We offer an integrated suite of SEO services designed to cover all your needs:</p><ul class="list-disc list-inside mt-2 space-y-1"><li>On-Page SEO: Optimizing your site's content, URL structure, and meta tags to be search-engine friendly and an enjoyable read for users.</li><li>Off-Page SEO: Building a strong network of high-quality backlinks from trusted websites to boost your site's authority in Google's eyes.</li><li>SEO Audits: A comprehensive examination of your site to identify strengths and weaknesses, plus a clear action plan for fixes and improvements.</li><li>Competitor Analysis: Studying your competitors' strategies in full and turning their weaknesses into your strengths.</li><li>SEO Consulting: Consulting sessions with our experts to help you shape your strategies and accelerate your growth.</li></ul></div><div><h4 class="font-bold text-lg mb-2 text-white">Let's Start Your Journey to the Top</h4><p>At Dalia Ahmed, we believe the potential of your business is limitless, and we're here to help you unlock it. We're not looking for clients — we're looking for success partners. If you're searching for a trusted partner who puts your interests above everything else, and has the expertise and tools to take you where you deserve to be, we're the perfect choice.</p><p class="mt-2">Contact us today and let's start a serious conversation about your digital future. Together, we'll write your next success story.</p></div>
+                </div>
+            </div>
+
+            <!-- Service 5 -->
+            <div class="glass-card neon-border p-8 group fade-in-up" style="transition-delay:0.4s">
+                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-yellow-400/20 to-yellow-400/5 flex items-center justify-center mb-6 group-hover:shadow-[0_0_30px_rgba(250,204,21,0.3)] transition-shadow duration-500">
+                    <i data-lucide="megaphone" class="w-7 h-7 text-yellow-400"></i>
+                </div>
+                <h3 class="font-poppins font-semibold text-xl mb-3" data-i18n="services.digitalMarketing.title">Digital Marketing</h3>
+                <p class="text-gray-400 text-sm leading-relaxed" data-i18n="services.digitalMarketing.desc">Data-driven marketing strategies that maximize ROI and fuel growth.</p>
+                <a href="service.html?id=digitalMarketing" class="inline-flex items-center gap-2 mt-6 px-5 py-2.5 rounded-full bg-gradient-to-r from-yellow-400 to-amber-500 text-white text-sm font-semibold hover:shadow-[0_0_25px_rgba(250,204,21,0.4)] transition-all duration-300 hover:scale-105">
+                    <span data-i18n-lbl="details">Read More</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4 svc-arrow"></i>
+                </a>
+            </div>
+
+            <!-- Service 6 -->
+            <div class="glass-card neon-border p-8 group fade-in-up" style="transition-delay:0.5s">
+                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-400/20 to-orange-400/5 flex items-center justify-center mb-6 group-hover:shadow-[0_0_30px_rgba(251,146,60,0.3)] transition-shadow duration-500">
+                    <i data-lucide="target" class="w-7 h-7 text-orange-400"></i>
+                </div>
+                <h3 class="font-poppins font-semibold text-xl mb-3" data-i18n="services.adCampaigns.title">Ad Campaigns</h3>
+                <p class="text-gray-400 text-sm leading-relaxed" data-i18n="services.adCampaigns.desc">Targeted advertising campaigns that reach the right audience at the right time.</p>
+                <a href="service.html?id=adCampaigns" class="inline-flex items-center gap-2 mt-6 px-5 py-2.5 rounded-full bg-gradient-to-r from-orange-400 to-red-400 text-white text-sm font-semibold hover:shadow-[0_0_25px_rgba(251,146,60,0.4)] transition-all duration-300 hover:scale-105">
+                    <span data-i18n-lbl="details">Read More</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4 svc-arrow"></i>
+                </a>
+            </div>
+
+            <!-- Service 7 -->
+            <div class="glass-card neon-border p-8 group fade-in-up" style="transition-delay:0.6s">
+                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-400/20 to-blue-400/5 flex items-center justify-center mb-6 group-hover:shadow-[0_0_30px_rgba(96,165,250,0.3)] transition-shadow duration-500">
+                    <i data-lucide="share-2" class="w-7 h-7 text-blue-400"></i>
+                </div>
+                <h3 class="font-poppins font-semibold text-xl mb-3" data-i18n="services.socialMedia.title">Social Media</h3>
+                <p class="text-gray-400 text-sm leading-relaxed" data-i18n="services.socialMedia.desc">Engaging social strategies that build community and amplify your brand.</p>
+                <a href="service.html?id=socialMedia" class="inline-flex items-center gap-2 mt-6 px-5 py-2.5 rounded-full bg-gradient-to-r from-blue-400 to-indigo-500 text-white text-sm font-semibold hover:shadow-[0_0_25px_rgba(96,165,250,0.4)] transition-all duration-300 hover:scale-105">
+                    <span data-i18n-lbl="details">Read More</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4 svc-arrow"></i>
+                </a>
+            </div>
+
+            <!-- Service 8 -->
+            <div class="glass-card neon-border p-8 group fade-in-up" style="transition-delay:0.7s">
+                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-pink-400/20 to-pink-400/5 flex items-center justify-center mb-6 group-hover:shadow-[0_0_30px_rgba(244,114,182,0.3)] transition-shadow duration-500">
+                    <i data-lucide="pen-tool" class="w-7 h-7 text-pink-400"></i>
+                </div>
+                <h3 class="font-poppins font-semibold text-xl mb-3" data-i18n="services.brandIdentity.title">Brand Identity</h3>
+                <p class="text-gray-400 text-sm leading-relaxed" data-i18n="services.brandIdentity.desc">Memorable brand identities that resonate with your target audience.</p>
+                <a href="service.html?id=brandIdentity" class="inline-flex items-center gap-2 mt-6 px-5 py-2.5 rounded-full bg-gradient-to-r from-pink-400 to-fuchsia-500 text-white text-sm font-semibold hover:shadow-[0_0_25px_rgba(244,114,182,0.4)] transition-all duration-300 hover:scale-105">
+                    <span data-i18n-lbl="details">Read More</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4 svc-arrow"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====== WHY CHOOSE US ====== -->
+<section id="about" class="relative py-32 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-dark-900 via-dark-800 to-dark-900"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-primary/5 rounded-full blur-[150px]"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6">
+        <div class="text-center mb-20 fade-in-up">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-6 text-sm">
+                <i data-lucide="trophy" class="w-4 h-4 text-accent"></i>
+                <span class="text-gray-300" data-i18n="sections.aboutLabel">Why Choose Us</span>
+            </div>
+            <h2 class="font-poppins font-bold text-3xl md:text-5xl tracking-tight mb-6" data-i18n="sections.aboutTitle">
+                Numbers That <span class="gradient-text">Speak</span>
+            </h2>
+            <p class="text-gray-400 text-lg max-w-2xl mx-auto" data-i18n="about.subtitle">
+                Our track record of excellence and commitment to results sets us apart.
+            </p>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="glass-card p-8 text-center group fade-in-up">
+                <div class="font-poppins font-bold text-5xl md:text-6xl gradient-text counter-glow mb-3" data-target="100">0</div>
+                <div class="text-xl font-semibold mb-1">+</div>
+                <p class="text-gray-400" data-i18n="about.stats.projects">Projects Completed</p>
+                <div class="w-12 h-1 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mt-4 group-hover:w-24 transition-all duration-500"></div>
+            </div>
+            <div class="glass-card p-8 text-center group fade-in-up" style="transition-delay:0.1s">
+                <div class="font-poppins font-bold text-5xl md:text-6xl gradient-text counter-glow mb-3" data-target="95">0</div>
+                <div class="text-xl font-semibold mb-1">%</div>
+                <p class="text-gray-400" data-i18n="about.stats.satisfaction">Client Satisfaction</p>
+                <div class="w-12 h-1 bg-gradient-to-r from-secondary to-accent rounded-full mx-auto mt-4 group-hover:w-24 transition-all duration-500"></div>
+            </div>
+            <div class="glass-card p-8 text-center group fade-in-up" style="transition-delay:0.2s">
+                <div class="font-poppins font-bold text-5xl md:text-6xl gradient-text counter-glow mb-3" data-target="24">0</div>
+                <div class="text-xl font-semibold mb-1">/7</div>
+                <p class="text-gray-400" data-i18n="about.stats.support">Support Available</p>
+                <div class="w-12 h-1 bg-gradient-to-r from-accent to-primary rounded-full mx-auto mt-4 group-hover:w-24 transition-all duration-500"></div>
+            </div>
+            <div class="glass-card p-8 text-center group fade-in-up" style="transition-delay:0.3s">
+                <div class="font-poppins font-bold text-5xl md:text-6xl gradient-text counter-glow mb-3" data-target="5">0</div>
+                <div class="text-xl font-semibold mb-1">+</div>
+                <p class="text-gray-400" data-i18n="about.stats.years">Years Experience</p>
+                <div class="w-12 h-1 bg-gradient-to-r from-primary to-accent rounded-full mx-auto mt-4 group-hover:w-24 transition-all duration-500"></div>
+            </div>
+        </div>
+
+        <!-- Features row -->
+        <div class="grid md:grid-cols-3 gap-8 mt-20">
+            <div class="glass-card p-8 fade-in-up">
+                <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                    <i data-lucide="shield-check" class="w-6 h-6 text-primary"></i>
+                </div>
+                <h3 class="font-poppins font-semibold text-lg mb-2" data-i18n="about.features.reliable.title">Trusted & Reliable</h3>
+                <p class="text-gray-400 text-sm" data-i18n="about.features.reliable.desc">We build lasting partnerships based on trust, transparency, and consistent delivery.</p>
+            </div>
+            <div class="glass-card p-8 fade-in-up" style="transition-delay:0.1s">
+                <div class="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center mb-4">
+                    <i data-lucide="rocket" class="w-6 h-6 text-secondary"></i>
+                </div>
+                <h3 class="font-poppins font-semibold text-lg mb-2" data-i18n="about.features.fast.title">Fast Delivery</h3>
+                <p class="text-gray-400 text-sm" data-i18n="about.features.fast.desc">We meet deadlines without compromising quality. Your time is our priority.</p>
+            </div>
+            <div class="glass-card p-8 fade-in-up" style="transition-delay:0.2s">
+                <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-4">
+                    <i data-lucide="heart-handshake" class="w-6 h-6 text-accent"></i>
+                </div>
+                <h3 class="font-poppins font-semibold text-lg mb-2" data-i18n="about.features.support.title">Dedicated Support</h3>
+                <p class="text-gray-400 text-sm" data-i18n="about.features.support.desc">Round-the-clock support from our expert team. We're always here for you.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====== PORTFOLIO SECTION ====== -->
+<section id="portfolio" class="relative py-32 overflow-hidden">
+    <div class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px]"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16 fade-in-up">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-6 text-sm">
+                <i data-lucide="briefcase" class="w-4 h-4 text-secondary"></i>
+                <span class="text-gray-300" data-i18n="sections.portfolioLabel">Our Work</span>
+            </div>
+            <h2 class="font-poppins font-bold text-3xl md:text-5xl tracking-tight mb-6" data-i18n="sections.portfolioTitle">
+                Featured <span class="gradient-text">Portfolio</span>
+            </h2>
+            <p class="text-gray-400 text-lg max-w-2xl mx-auto" data-i18n="portfolio.subtitle">
+                Explore our latest projects and see how we've helped businesses transform their digital presence.
+            </p>
+        </div>
+
+        <!-- Filters -->
+        <div class="flex flex-wrap justify-center gap-3 mb-12 fade-in-up">
+            <button class="filter-btn active px-5 py-2 rounded-full glass-card text-sm font-medium transition-all duration-300 hover:border-primary/30" data-filter="all" data-i18n="portfolio.filters.all">All</button>
+            <button class="filter-btn px-5 py-2 rounded-full glass-card text-sm font-medium text-gray-300 transition-all duration-300 hover:border-primary/30" data-filter="web" data-i18n="portfolio.filters.webDesign">Web Design</button>
+            <button class="filter-btn px-5 py-2 rounded-full glass-card text-sm font-medium text-gray-300 transition-all duration-300 hover:border-primary/30" data-filter="ecom" data-i18n="portfolio.filters.ecom">E-commerce</button>
+            <button class="filter-btn px-5 py-2 rounded-full glass-card text-sm font-medium text-gray-300 transition-all duration-300 hover:border-primary/30" data-filter="brand" data-i18n="portfolio.filters.branding">Branding</button>
+            <button class="filter-btn px-5 py-2 rounded-full glass-card text-sm font-medium text-gray-300 transition-all duration-300 hover:border-primary/30" data-filter="marketing" data-i18n="portfolio.filters.marketing">Marketing</button>
+        </div>
+
+        <!-- Portfolio Grid -->
+        <div id="portfolioGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="portfolio-item glass-card overflow-hidden group fade-in-up" data-category="web">
+                <div class="relative aspect-[4/3] overflow-hidden">
+                    <img loading="lazy" decoding="async" src="https://picsum.photos/seed/dalia-web1/600/450.jpg" alt="Portfolio" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+                        <div>
+                            <h4 class="font-poppins font-semibold text-lg" data-i18n="portfolio.items.techVision.title">TechVision Platform</h4>
+                            <p class="text-gray-300 text-sm" data-i18n="portfolio.items.techVision.tag">Web Design & Development</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-item glass-card overflow-hidden group fade-in-up" data-category="ecom" style="transition-delay:0.1s">
+                <a href="https://daliaahmedreda.github.io/luxe/" target="_blank" rel="noopener" class="block cursor-pointer">
+                    <div class="relative aspect-[4/3] overflow-hidden">
+                        <img loading="lazy" decoding="async" src="luxe.webp" alt="Luxe Fashion Store" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+                            <div>
+                                <h4 class="font-poppins font-semibold text-lg" data-i18n="portfolio.items.luxe.title">Luxe Fashion Store</h4>
+                                <p class="text-gray-300 text-sm" data-i18n="portfolio.items.luxe.tag">E-commerce Solution</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="portfolio-item glass-card overflow-hidden group fade-in-up" data-category="brand" style="transition-delay:0.2s">
+                <div class="relative aspect-[4/3] overflow-hidden">
+                    <img loading="lazy" decoding="async" src="https://picsum.photos/seed/dalia-brand1/600/450.jpg" alt="Portfolio" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+                        <div>
+                            <h4 class="font-poppins font-semibold text-lg" data-i18n="portfolio.items.apex.title">Apex Brand Identity</h4>
+                            <p class="text-gray-300 text-sm" data-i18n="portfolio.items.apex.tag">Brand Design</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-item glass-card overflow-hidden group fade-in-up" data-category="marketing" style="transition-delay:0.3s">
+                <div class="relative aspect-[4/3] overflow-hidden">
+                    <img loading="lazy" decoding="async" src="https://picsum.photos/seed/dalia-mkt1/600/450.jpg" alt="Portfolio" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+                        <div>
+                            <h4 class="font-poppins font-semibold text-lg" data-i18n="portfolio.items.growthFlow.title">GrowthFlow Campaign</h4>
+                            <p class="text-gray-300 text-sm" data-i18n="portfolio.items.growthFlow.tag">Digital Marketing</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-item glass-card overflow-hidden group fade-in-up" data-category="web" style="transition-delay:0.4s">
+                <div class="relative aspect-[4/3] overflow-hidden">
+                    <img loading="lazy" decoding="async" src="https://picsum.photos/seed/dalia-web2/600/450.jpg" alt="Portfolio" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+                        <div>
+                            <h4 class="font-poppins font-semibold text-lg" data-i18n="portfolio.items.fintech.title">FinTech Dashboard</h4>
+                            <p class="text-gray-300 text-sm" data-i18n="portfolio.items.fintech.tag">Web Application</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-item glass-card overflow-hidden group fade-in-up" data-category="ecom" style="transition-delay:0.5s">
+                <div class="relative aspect-[4/3] overflow-hidden">
+                    <img loading="lazy" decoding="async" src="https://picsum.photos/seed/dalia-ecom2/600/450.jpg" alt="Portfolio" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+                        <div>
+                            <h4 class="font-poppins font-semibold text-lg" data-i18n="portfolio.items.organic.title">Organic Market</h4>
+                            <p class="text-gray-300 text-sm" data-i18n="portfolio.items.organic.tag">E-commerce Store</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====== PROCESS SECTION ====== -->
+<section id="process" class="relative py-32 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-dark-900 via-dark-800 to-dark-900"></div>
+    <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[120px]"></div>
+
+    <div class="relative z-10 max-w-5xl mx-auto px-6">
+        <div class="text-center mb-20 fade-in-up">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-6 text-sm">
+                <i data-lucide="workflow" class="w-4 h-4 text-primary"></i>
+                <span class="text-gray-300" data-i18n="sections.processLabel">Our Process</span>
+            </div>
+            <h2 class="font-poppins font-bold text-3xl md:text-5xl tracking-tight mb-6" data-i18n="sections.processTitle">
+                How We <span class="gradient-text">Work</span>
+            </h2>
+            <p class="text-gray-400 text-lg max-w-2xl mx-auto" data-i18n="process.subtitle">
+                A proven process that transforms your vision into a powerful digital reality.
+            </p>
+        </div>
+
+        <!-- Timeline -->
+        <div class="relative">
+            <div class="timeline-line hidden md:block"></div>
+
+            <!-- Step 1 -->
+            <div class="relative flex flex-col md:flex-row items-center mb-16 fade-in-up">
+                <div class="md:w-1/2 md:pr-16 md:text-right mb-6 md:mb-0">
+                    <div class="glass-card p-8 inline-block">
+                        <span class="font-space text-primary font-bold text-sm tracking-wider">01</span>
+                        <h3 class="font-poppins font-bold text-2xl mt-2 mb-3" data-i18n="process.step1.title">Discovery</h3>
+                        <p class="text-gray-400 text-sm" data-i18n="process.step1.desc">We dive deep into your business goals, audience, and competitive landscape to build a solid foundation.</p>
+                    </div>
+                </div>
+                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center z-10 shadow-[0_0_20px_rgba(124,58,237,0.4)] shrink-0">
+                    <i data-lucide="compass" class="w-5 h-5 text-white"></i>
+                </div>
+                <div class="md:w-1/2 md:pl-16"></div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="relative flex flex-col md:flex-row items-center mb-16 fade-in-up">
+                <div class="md:w-1/2 md:pr-16"></div>
+                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-secondary to-accent flex items-center justify-center z-10 shadow-[0_0_20px_rgba(0,212,255,0.4)] shrink-0">
+                    <i data-lucide="lightbulb" class="w-5 h-5 text-white"></i>
+                </div>
+                <div class="md:w-1/2 md:pl-16 mt-6 md:mt-0">
+                    <div class="glass-card p-8 inline-block">
+                        <span class="font-space text-secondary font-bold text-sm tracking-wider">02</span>
+                        <h3 class="font-poppins font-bold text-2xl mt-2 mb-3" data-i18n="process.step2.title">Strategy</h3>
+                        <p class="text-gray-400 text-sm" data-i18n="process.step2.desc">We craft a comprehensive strategy that aligns with your objectives and maximizes your digital potential.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="relative flex flex-col md:flex-row items-center mb-16 fade-in-up">
+                <div class="md:w-1/2 md:pr-16 md:text-right mb-6 md:mb-0">
+                    <div class="glass-card p-8 inline-block">
+                        <span class="font-space text-accent font-bold text-sm tracking-wider">03</span>
+                        <h3 class="font-poppins font-bold text-2xl mt-2 mb-3" data-i18n="process.step3.title">Design</h3>
+                        <p class="text-gray-400 text-sm" data-i18n="process.step3.desc">Our designers create stunning, user-centric interfaces that elevate your brand and delight users.</p>
+                    </div>
+                </div>
+                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-accent to-primary flex items-center justify-center z-10 shadow-[0_0_20px_rgba(255,79,216,0.4)] shrink-0">
+                    <i data-lucide="pen-tool" class="w-5 h-5 text-white"></i>
+                </div>
+                <div class="md:w-1/2 md:pl-16"></div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="relative flex flex-col md:flex-row items-center mb-16 fade-in-up">
+                <div class="md:w-1/2 md:pr-16"></div>
+                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center z-10 shadow-[0_0_20px_rgba(124,58,237,0.4)] shrink-0">
+                    <i data-lucide="code-2" class="w-5 h-5 text-white"></i>
+                </div>
+                <div class="md:w-1/2 md:pl-16 mt-6 md:mt-0">
+                    <div class="glass-card p-8 inline-block">
+                        <span class="font-space text-primary font-bold text-sm tracking-wider">04</span>
+                        <h3 class="font-poppins font-bold text-2xl mt-2 mb-3" data-i18n="process.step4.title">Development</h3>
+                        <p class="text-gray-400 text-sm" data-i18n="process.step4.desc">We bring designs to life with clean, performant code and cutting-edge technology stacks.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="relative flex flex-col md:flex-row items-center fade-in-up">
+                <div class="md:w-1/2 md:pr-16 md:text-right mb-6 md:mb-0">
+                    <div class="glass-card p-8 inline-block">
+                        <span class="font-space text-secondary font-bold text-sm tracking-wider">05</span>
+                        <h3 class="font-poppins font-bold text-2xl mt-2 mb-3" data-i18n="process.step5.title">Launch</h3>
+                        <p class="text-gray-400 text-sm" data-i18n="process.step5.desc">We ensure a flawless launch with thorough testing, optimization, and ongoing support.</p>
+                    </div>
+                </div>
+                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-secondary to-accent flex items-center justify-center z-10 shadow-[0_0_20px_rgba(0,212,255,0.4)] shrink-0">
+                    <i data-lucide="rocket" class="w-5 h-5 text-white"></i>
+                </div>
+                <div class="md:w-1/2 md:pl-16"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====== TESTIMONIALS ====== -->
+<section id="testimonials" class="relative py-32 overflow-hidden">
+    <div class="absolute top-0 left-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[120px]"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6">
+        <div class="text-center mb-20 fade-in-up">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-6 text-sm">
+                <i data-lucide="message-circle" class="w-4 h-4 text-accent"></i>
+                <span class="text-gray-300" data-i18n="sections.testimonialsLabel">Testimonials</span>
+            </div>
+            <h2 class="font-poppins font-bold text-3xl md:text-5xl tracking-tight mb-6" data-i18n="sections.testimonialsTitle">
+                What Our Clients <span class="gradient-text">Say</span>
+            </h2>
+        </div>
+
+        <!-- Carousel -->
+        <div class="relative max-w-4xl mx-auto">
+            <div class="overflow-hidden rounded-3xl">
+                <div id="testimonialTrack" class="testimonial-track">
+                    <!-- Testimonial 1 -->
+                    <div class="w-full shrink-0 px-4">
+                        <div class="glass-card p-10 md:p-12 text-center">
+                            <div class="flex justify-center gap-1 mb-6">
+                                <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                                <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                                <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                                <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                                <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                            </div>
+                            <p class="text-lg md:text-xl text-gray-200 leading-relaxed mb-8 italic" data-i18n="testimonials.slide1.quote">"Dalia Ahmed transformed our online presence completely. The website they built is not just beautiful — it's a conversion machine. Our sales increased by 200% within three months!"</p>
+                            <div class="flex items-center justify-center gap-4">
+                                <img loading="lazy" decoding="async" src="https://picsum.photos/seed/client1/80/80.jpg" alt="Client" class="w-14 h-14 rounded-full border-2 border-primary/30">
+                                <div class="text-left">
+                                    <p class="font-poppins font-semibold" data-i18n="testimonials.slide1.name">Sarah Mitchell</p>
+                                    <p class="text-gray-400 text-sm" data-i18n="testimonials.slide1.role">CEO, TechVision Inc.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Testimonial 2 -->
+                    <div class="w-full shrink-0 px-4">
+                        <div class="glass-card p-10 md:p-12 text-center">
+                            <div class="flex justify-center gap-1 mb-6">
+                                <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                                <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                                <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                                <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                                <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                            </div>
+                            <p class="text-lg md:text-xl text-gray-200 leading-relaxed mb-8 italic" data-i18n="testimonials.slide2.quote">"The team's attention to detail and creative approach exceeded all our expectations. They don't just deliver projects — they deliver experiences that wow customers."</p>
+                            <div class="flex items-center justify-center gap-4">
+                                <img loading="lazy" decoding="async" src="https://picsum.photos/seed/client2/80/80.jpg" alt="Client" class="w-14 h-14 rounded-full border-2 border-secondary/30">
+                                <div class="text-left">
+                                    <p class="font-poppins font-semibold" data-i18n="testimonials.slide2.name">James Rodriguez</p>
+                                    <p class="text-gray-400 text-sm" data-i18n="testimonials.slide2.role">Founder, GrowthFlow</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Testimonial 3 -->
+                    <div class="w-full shrink-0 px-4">
+                        <div class="glass-card p-10 md:p-12 text-center">
+                            <div class="flex justify-center gap-1 mb-6">
+                                <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                                <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                                <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                                <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                                <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                            </div>
+                            <p class="text-lg md:text-xl text-gray-200 leading-relaxed mb-8 italic" data-i18n="testimonials.slide3.quote">"Working with Dalia Ahmed was a game-changer. Their SEO and marketing strategies put us on the first page of Google. The ROI has been incredible!"</p>
+                            <div class="flex items-center justify-center gap-4">
+                                <img loading="lazy" decoding="async" src="https://picsum.photos/seed/client3/80/80.jpg" alt="Client" class="w-14 h-14 rounded-full border-2 border-accent/30">
+                                <div class="text-left">
+                                    <p class="font-poppins font-semibold" data-i18n="testimonials.slide3.name">Emily Chen</p>
+                                    <p class="text-gray-400 text-sm" data-i18n="testimonials.slide3.role">Marketing Director, Apex Co.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Testimonial 4 -->
+                    <div class="w-full shrink-0 px-4">
+                        <div class="glass-card p-10 md:p-12 text-center">
+                            <div class="flex justify-center gap-1 mb-6">
+                                <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                                <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                                <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                                <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                                <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                            </div>
+                            <p class="text-lg md:text-xl text-gray-200 leading-relaxed mb-8 italic" data-i18n="testimonials.slide4.quote">"From branding to social media management, everything was executed flawlessly. Dalia Ahmed's team truly understands the digital landscape."</p>
+                            <div class="flex items-center justify-center gap-4">
+                                <img loading="lazy" decoding="async" src="https://picsum.photos/seed/client4/80/80.jpg" alt="Client" class="w-14 h-14 rounded-full border-2 border-primary/30">
+                                <div class="text-left">
+                                    <p class="font-poppins font-semibold" data-i18n="testimonials.slide4.name">Michael Park</p>
+                                    <p class="text-gray-400 text-sm" data-i18n="testimonials.slide4.role">COO, NovaBrand</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation dots -->
+            <div class="flex justify-center gap-3 mt-8">
+                <button class="testimonial-dot w-3 h-3 rounded-full bg-primary transition-all duration-300" data-index="0"></button>
+                <button class="testimonial-dot w-3 h-3 rounded-full bg-white/20 transition-all duration-300" data-index="1"></button>
+                <button class="testimonial-dot w-3 h-3 rounded-full bg-white/20 transition-all duration-300" data-index="2"></button>
+                <button class="testimonial-dot w-3 h-3 rounded-full bg-white/20 transition-all duration-300" data-index="3"></button>
+            </div>
+
+            <!-- Arrows -->
+            <button id="prevTestimonial" class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-12 h-12 rounded-full glass-card flex items-center justify-center hover:border-primary/30 transition-all hidden md:flex">
+                <i data-lucide="chevron-left" class="w-5 h-5"></i>
+            </button>
+            <button id="nextTestimonial" class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-12 h-12 rounded-full glass-card flex items-center justify-center hover:border-primary/30 transition-all hidden md:flex">
+                <i data-lucide="chevron-right" class="w-5 h-5"></i>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- ====== CTA SECTION ====== -->
+<section id="contact" class="relative py-32 overflow-hidden">
+    <div class="absolute inset-0">
+        <div class="absolute inset-0 cta-animated-bg opacity-10"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[150px]"></div>
+    </div>
+
+    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+        <div class="fade-in-up">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-8 text-sm">
+                <i data-lucide="zap" class="w-4 h-4 text-primary"></i>
+                <span class="text-gray-300" data-i18n="sections.contactLabel">Let's Talk</span>
+            </div>
+            <h2 class="font-poppins font-bold text-4xl md:text-6xl lg:text-7xl tracking-tight mb-6" data-i18n="sections.contactTitle">
+                Ready To Grow<br>
+                <span class="gradient-text">Your Business?</span>
+            </h2>
+            <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-12" data-i18n="sections.contactText">
+                Let's turn your vision into reality. Get in touch today and discover how we can transform your digital presence.
+            </p>
+
+            <!-- CTA Form / Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+                <a href="https://wa.me/201023116065" target="_blank" class="group inline-flex items-center gap-3 px-10 py-5 rounded-full bg-gradient-to-r from-primary to-secondary text-white font-semibold text-lg hover:shadow-[0_0_50px_rgba(124,58,237,0.4)] transition-all duration-300 hover:scale-105">
+                    <span data-i18n="contact.start">Start Your Project</span>
+                    <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+                <a href="mailto:daliaahmedreda24@gmail.com" class="inline-flex items-center gap-2 px-10 py-5 rounded-full glass-card text-white font-semibold text-lg hover:border-primary/30 transition-all duration-300">
+                    <i data-lucide="mail" class="w-5 h-5"></i>
+                    <span data-i18n="contact.emailUs">Email Us</span>
+                </a>
+            </div>
+
+            <!-- Contact info -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-card p-6 flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+                        <i data-lucide="mail" class="w-5 h-5 text-primary"></i>
+                    </div>
+                    <div class="text-left">
+                        <p class="text-gray-400 text-xs uppercase tracking-wider" data-i18n="contact.emailLabel">Email</p>
+                        <a href="mailto:daliaahmedreda24@gmail.com" class="font-medium hover:text-primary transition-colors">daliaahmedreda24@gmail.com</a>
+                    </div>
+                </div>
+                <div class="glass-card p-6 flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center shrink-0">
+                        <i data-lucide="phone" class="w-5 h-5 text-secondary"></i>
+                    </div>
+                    <div class="text-left">
+                        <p class="text-gray-400 text-xs uppercase tracking-wider" data-i18n="contact.phoneLabel">Phone</p>
+                        <a href="tel:+201023116065" id="footerPhone" class="font-medium hover:text-primary transition-colors" dir="ltr">+20 100 079 1799</a>
+                    </div>
+                </div>
+                <div class="glass-card p-6 flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center shrink-0">
+                        <i data-lucide="map-pin" class="w-5 h-5 text-accent"></i>
+                    </div>
+                    <div class="text-left">
+                        <p class="text-gray-400 text-xs uppercase tracking-wider" data-i18n="contact.locationLabel">Location</p>
+                        <p class="font-medium">Cairo, Egypt</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====== FOOTER ====== -->
+<footer class="relative pt-20 pb-8 border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+            <!-- Brand -->
+            <div>
+                <div class="flex items-center gap-2 mb-6">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center font-poppins font-bold text-white text-lg">D</div>
+                    <span class="font-poppins font-bold text-xl tracking-tight">DALIA AHMED</span>
+                </div>
+                <p class="text-gray-400 text-sm leading-relaxed mb-6" data-i18n="footer.desc">Transforming businesses into digital success stories through innovative design, development, and marketing solutions.</p>
+                <div class="flex gap-3">
+                    <a href="#" class="w-10 h-10 rounded-xl glass-card flex items-center justify-center hover:border-primary/30 transition-all hover:scale-110" aria-label="Facebook">
+                        <i data-lucide="facebook" class="w-4 h-4"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-xl glass-card flex items-center justify-center hover:border-primary/30 transition-all hover:scale-110" aria-label="Instagram">
+                        <i data-lucide="instagram" class="w-4 h-4"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-xl glass-card flex items-center justify-center hover:border-primary/30 transition-all hover:scale-110" aria-label="Twitter">
+                        <i data-lucide="twitter" class="w-4 h-4"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-xl glass-card flex items-center justify-center hover:border-primary/30 transition-all hover:scale-110" aria-label="LinkedIn">
+                        <i data-lucide="linkedin" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Services -->
+            <div>
+                <h4 class="font-poppins font-semibold text-lg mb-6" data-i18n="footer.services">Services</h4>
+                <ul class="space-y-3">
+                    <li><a href="service.html?id=webDesign" class="text-gray-400 text-sm hover:text-primary transition-colors" data-i18n="footer.serviceLinks.webDesign">Web Design</a></li>
+                    <li><a href="service.html?id=webDevelopment" class="text-gray-400 text-sm hover:text-primary transition-colors" data-i18n="footer.serviceLinks.webDevelopment">Web Development</a></li>
+                    <li><a href="service.html?id=ecom" class="text-gray-400 text-sm hover:text-primary transition-colors" data-i18n="footer.serviceLinks.ecom">E-commerce Solutions</a></li>
+                    <li><a href="service.html?id=seo" class="text-gray-400 text-sm hover:text-primary transition-colors" data-i18n="footer.serviceLinks.seo">SEO Optimization</a></li>
+                    <li><a href="service.html?id=digitalMarketing" class="text-gray-400 text-sm hover:text-primary transition-colors" data-i18n="footer.serviceLinks.marketing">Digital Marketing</a></li>
+                    <li><a href="service.html?id=brandIdentity" class="text-gray-400 text-sm hover:text-primary transition-colors" data-i18n="footer.serviceLinks.brand">Brand Identity</a></li>
+                </ul>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h4 class="font-poppins font-semibold text-lg mb-6" data-i18n="footer.quickLinks">Quick Links</h4>
+                <ul class="space-y-3">
+                    <li><a href="#home" class="text-gray-400 text-sm hover:text-primary transition-colors" data-i18n="footer.quick.home">Home</a></li>
+                    <li><a href="#about" class="text-gray-400 text-sm hover:text-primary transition-colors" data-i18n="footer.quick.about">About Us</a></li>
+                    <li><a href="#portfolio" class="text-gray-400 text-sm hover:text-primary transition-colors" data-i18n="footer.quick.portfolio">Portfolio</a></li>
+                    <li><a href="#process" class="text-gray-400 text-sm hover:text-primary transition-colors" data-i18n="footer.quick.process">Our Process</a></li>
+                    <li><a href="#testimonials" class="text-gray-400 text-sm hover:text-primary transition-colors" data-i18n="footer.quick.testimonials">Testimonials</a></li>
+                    <li><a href="#contact" class="text-gray-400 text-sm hover:text-primary transition-colors" data-i18n="footer.quick.contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Newsletter -->
+            <div>
+                <h4 class="font-poppins font-semibold text-lg mb-6" data-i18n="newsletter.title">Stay Updated</h4>
+                <p class="text-gray-400 text-sm mb-4" data-i18n="newsletter.desc">Subscribe to our newsletter for the latest tips and updates.</p>
+                <form id="newsletterForm" class="flex gap-2" action="https://formsubmit.co/ajax/daliaahmedreda24@gmail.com" method="POST">
+                    <input type="hidden" name="_subject" value="New newsletter subscription">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+                    <input type="email" name="email" placeholder="Your email" data-i18n-placeholder="newsletter.placeholder" class="flex-1 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-sm focus:border-primary/50 focus:outline-none transition-colors placeholder:text-gray-500" required>
+                    <button type="submit" class="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-primary to-secondary text-white text-sm font-medium hover:shadow-[0_0_20px_rgba(124,58,237,0.3)] transition-all hover:scale-105">
+                        <span data-i18n="newsletter.btn">Subscribe</span><i data-lucide="send" class="w-4 h-4"></i>
+                    </button>
+                </form>
+                <p id="newsletterMsg" class="mt-2 text-xs hidden"></p>
+            </div>
+        </div>
+
+        <!-- Bottom bar -->
+        <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+            <p class="text-gray-500 text-sm" data-i18n="footer.copyright">&copy; 2025 Dalia Ahmed. All rights reserved.</p>
+            <div class="flex gap-6">
+                <a href="#" class="text-gray-500 text-sm hover:text-primary transition-colors" data-i18n="footer.privacy">Privacy Policy</a>
+                <a href="#" class="text-gray-500 text-sm hover:text-primary transition-colors" data-i18n="footer.terms">Terms of Service</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- ====== WHATSAPP FLOATING BUTTON ====== -->
+<a href="https://wa.me/201023116065" target="_blank" id="whatsappBtn" class="fixed bottom-6 right-6 z-[999] w-16 h-16 rounded-full bg-[#25D366] flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300" style="animation: whatsappPulse 2s infinite" aria-label="Chat on WhatsApp">
+    <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- ====== SCRIPTS ====== -->
+<script>
+// Initialize Lucide icons
+try { lucide.createIcons(); } catch(e) { console.warn('Lucide icons failed to load:', e); }
+
+const translations = {
+  en: {
+    nav: { home: 'Home', services: 'Services', about: 'About', portfolio: 'Portfolio', process: 'Process', testimonials: 'Testimonials', contact: 'Contact' },
+    cta: { getStarted: 'Get Started', viewPortfolio: 'View Portfolio' },
+    hero: { available: 'Available for new projects', title: 'Transform Your Business Into a <span class="gradient-text"> Digital Success Story</span>', subtitle: 'We create stunning websites, powerful digital solutions, and high-converting marketing campaigns that help brands grow faster.', scroll: 'Scroll', trust: { projects: 'Projects', satisfaction: 'Satisfaction', years: 'Years' } },
+    meta: { title: 'Dalia Ahmed — Digital Agency | Web Design, Development & Marketing', desc: 'Dalia Ahmed Digital Agency — We create stunning websites, powerful digital solutions, and high-converting marketing campaigns that help brands grow faster.' },
+    loader: { text: 'Loading Experience' },
+    services: {
+      webDesign: { title: 'Web Design', desc: 'Stunning, responsive designs that captivate visitors and create lasting impressions.' },
+      webDevelopment: { title: 'Web Development', desc: 'Robust, scalable web applications built with cutting-edge technologies.' },
+      ecom: { title: 'E-commerce Stores', desc: 'High-converting online stores that turn browsers into loyal customers.' },
+      seo: { title: 'SEO Optimization', desc: 'Dominate search rankings and drive organic traffic to your website.' },
+      digitalMarketing: { title: 'Digital Marketing', desc: 'Data-driven marketing strategies that maximize ROI and fuel growth.' },
+      adCampaigns: { title: 'Ad Campaigns', desc: 'Targeted advertising campaigns that reach the right audience at the right time.' },
+      socialMedia: { title: 'Social Media', desc: 'Engaging social strategies that build community and amplify your brand.' },
+      brandIdentity: { title: 'Brand Identity', desc: 'Memorable brand identities that resonate with your target audience.' }
+    },
+    about: {
+      subtitle: 'Our track record of excellence and commitment to results sets us apart.',
+      stats: { projects: 'Projects Completed', satisfaction: 'Client Satisfaction', support: 'Support Available', years: 'Years Experience' },
+      features: {
+        reliable: { title: 'Trusted & Reliable', desc: 'We build lasting partnerships based on trust, transparency, and consistent delivery.' },
+        fast: { title: 'Fast Delivery', desc: 'We meet deadlines without compromising quality. Your time is our priority.' },
+        support: { title: 'Dedicated Support', desc: 'Round-the-clock support from our expert team. We\'re always here for you.' }
+      }
+    },
+    portfolio: {
+      subtitle: 'Explore our latest projects and see how we\'ve helped businesses transform their digital presence.',
+      filters: { all: 'All', webDesign: 'Web Design', ecom: 'E-commerce', branding: 'Branding', marketing: 'Marketing' },
+      items: {
+        techVision: { title: 'TechVision Platform', tag: 'Web Design & Development' },
+        luxe: { title: 'Luxe Fashion Store', tag: 'E-commerce Solution' },
+        apex: { title: 'Apex Brand Identity', tag: 'Brand Design' },
+        growthFlow: { title: 'GrowthFlow Campaign', tag: 'Digital Marketing' },
+        fintech: { title: 'FinTech Dashboard', tag: 'Web Application' },
+        organic: { title: 'Organic Market', tag: 'E-commerce Store' }
+      }
+    },
+    process: {
+      subtitle: 'A proven process that transforms your vision into a powerful digital reality.',
+      step1: { title: 'Discovery', desc: 'We dive deep into your business goals, audience, and competitive landscape to build a solid foundation.' },
+      step2: { title: 'Strategy', desc: 'We craft a comprehensive strategy that aligns with your objectives and maximizes your digital potential.' },
+      step3: { title: 'Design', desc: 'Our designers create stunning, user-centric interfaces that elevate your brand and delight users.' },
+      step4: { title: 'Development', desc: 'We bring designs to life with clean, performant code and cutting-edge technology stacks.' },
+      step5: { title: 'Launch', desc: 'We ensure a flawless launch with thorough testing, optimization, and ongoing support.' }
+    },
+    testimonials: {
+      slide1: { quote: '"Dalia Ahmed transformed our online presence completely. The website they built is not just beautiful — it\'s a conversion machine. Our sales increased by 200% within three months!"', name: 'Sarah Mitchell', role: 'CEO, TechVision Inc.' },
+      slide2: { quote: '"The team\'s attention to detail and creative approach exceeded all our expectations. They don\'t just deliver projects — they deliver experiences that wow customers."', name: 'James Rodriguez', role: 'Founder, GrowthFlow' },
+      slide3: { quote: '"Working with Dalia Ahmed was a game-changer. Their SEO and marketing strategies put us on the first page of Google. The ROI has been incredible!"', name: 'Emily Chen', role: 'Marketing Director, Apex Co.' },
+      slide4: { quote: '"From branding to social media management, everything was executed flawlessly. Dalia Ahmed\'s team truly understands the digital landscape."', name: 'Michael Park', role: 'COO, NovaBrand' }
+    },
+    contact: { start: 'Start Your Project', emailUs: 'Email Us', emailLabel: 'Email', phoneLabel: 'Phone', locationLabel: 'Location' },
+    footer: {
+      desc: 'Transforming businesses into digital success stories through innovative design, development, and marketing solutions.',
+      services: 'Services',
+      quickLinks: 'Quick Links',
+      serviceLinks: { webDesign: 'Web Design', webDevelopment: 'Web Development', ecom: 'E-commerce Solutions', seo: 'SEO Optimization', marketing: 'Digital Marketing', brand: 'Brand Identity' },
+      quick: { home: 'Home', about: 'About Us', portfolio: 'Portfolio', process: 'Our Process', testimonials: 'Testimonials', contact: 'Contact' },
+      copyright: '© 2025 Dalia Ahmed. All rights reserved.',
+      privacy: 'Privacy Policy',
+      terms: 'Terms of Service'
+    },
+    newsletter: { title: 'Stay Updated', desc: 'Subscribe to our newsletter for the latest tips and updates.', placeholder: 'Your email address', btn: 'Subscribe', sending: 'Sending…', success: 'Thanks for subscribing!', error: 'Something went wrong. Please try again.', invalid: 'Please enter a valid email address.' },
+    sections: { servicesLabel: 'Our Services', servicesTitle: 'Premium Digital <span class="gradient-text">Solutions</span>', servicesText: 'We offer a comprehensive suite of digital services designed to elevate your brand and accelerate your growth.', aboutLabel: 'Why Choose Us', aboutTitle: 'Numbers That <span class="gradient-text">Speak</span>', portfolioLabel: 'Our Work', portfolioTitle: 'Featured <span class="gradient-text">Portfolio</span>', processLabel: 'Our Process', processTitle: 'How We <span class="gradient-text">Work</span>', testimonialsLabel: 'Testimonials', testimonialsTitle: 'What Our Clients <span class="gradient-text">Say</span>', contactLabel: "Let's Talk", contactTitle: 'Ready To Grow<br><span class="gradient-text">Your Business?</span>', contactText: 'Let\'s turn your vision into reality. Get in touch today and discover how we can transform your digital presence.' },
+    aboutCard: { body: `<p>We build bridges between ideas and digital reality.</p><p>In a world where digital transformation is accelerating, we believe a website is not just pages on the internet — it is the true mirror of your brand and the first point of contact with your audience. That's why we founded Web Design to deliver a different experience in the world of web design; an experience that combines visual creativity, masterful coding, and a deep understanding of client needs.</p><p>We are not just designers — we are success partners who work side by side with our clients to turn their digital dreams into impactful interactive platforms that reflect their identity, strengthen their presence, and achieve their business goals.</p><div><h4 class="font-bold text-lg mb-2 text-white">Our Vision: Design That Inspires and Impacts</h4><p>We aspire to be the first destination in the Middle East for anyone seeking professional web design that combines:</p><ul class="list-disc list-inside mt-2 space-y-1"><li>Modern aesthetics that captivate attention.</li><li>Ease of use that makes the experience smooth and enjoyable.</li><li>Strong technical performance that ensures unmatched speed and security.</li></ul><p class="mt-2">We believe good design is design that goes unnoticed because it feels natural — yet it is the product of thousands of hours of thinking and innovation. We always strive for every website we deliver to be a work of art and a marketing tool at the same time.</p></div><div><h4 class="font-bold text-lg mb-2 text-white">Our Mission: We Build Experiences, Not Just Websites</h4><p>Our mission is simple and clear: turn your needs into innovative digital solutions with full commitment to quality, precision, and meeting deadlines. We put our client at the heart of every design decision, listen to their ideas, and translate them into interactive interfaces that maximize value for the end user.</p><p class="mt-2">We believe every project is unique, so we offer tailored solutions that fit your business size, your field, and your future vision. Whether you are a startup, an established organization, or an individual launching your digital identity, we are here to support you every step of the way.</p></div><div><h4 class="font-bold text-lg mb-2 text-white">Our Team: Expertise, Passion, and Creativity</h4><p>The Web Design team is made up of elite designers, developers, and UX/UI experts united by a single passion: crafting standout digital content. Every team member has a rich background in their field and keeps up with the latest technologies and trends in web design.</p><ul class="list-disc list-inside mt-2 space-y-1"><li>Designers create visual identities that express who you are.</li><li>Developers turn designs into clean, fast code compatible with all devices.</li><li>UX experts ensure every visitor to your site has an unforgettable experience.</li><li>Support team stays in constant contact to guarantee your full satisfaction.</li></ul></div><div><h4 class="font-bold text-lg mb-2 text-white">Why Us? (Our Keys of Excellence)</h4><ul class="space-y-1"><li>? Exclusive, innovative designs — we don't copy ready-made templates; we build a design that's uniquely yours from scratch.</li><li>? Exceptional technical performance — our sites are fast, secure, and SEO-optimized.</li><li>? Fully responsive across all devices — your site looks perfect on phones, tablets, and desktops.</li><li>? Commitment to deadlines and quality — we set a clear timeline and stick to it, delivering polished work.</li><li>? Ongoing technical support — we don't leave you after delivery; we provide follow-up and updates to keep your site outstanding.</li><li>? Competitive pricing — the best value for a fair price suitable for everyone.</li></ul></div><div><h4 class="font-bold text-lg mb-2 text-white">Success Partnerships</h4><p>We've worked with more than 200 clients across various fields: e-commerce stores, educational platforms, real estate companies, restaurants, medical clinics, blogs, and government and private institutions. Every project was a new success story, and every client became part of the Web Design family.</p><p class="mt-2">We're proud that a large percentage of our clients return to us to upgrade their sites or launch new projects — the biggest proof of their trust in us and the quality we deliver.</p></div><div><h4 class="font-bold text-lg mb-2 text-white">Our Future Together</h4><p>At Web Design, we don't view projects as mere contracts; we see them as the start of a long-term partnership. We're delighted to watch our clients grow and evolve, and to be part of their journey toward digital success.</p><p class="mt-2">If you're looking for:</p><ul class="list-disc list-inside mt-2 space-y-1"><li>A new website design that expresses your identity.</li><li>Redesigning your current website to refresh and upgrade it.</li><li>A digital consultation to improve your site's performance and increase sales.</li></ul><p class="mt-2">Then you're in the right place.</p></div><div><h4 class="font-bold text-lg mb-2 text-white">Contact Us and Start Your Digital Journey</h4><p>Don't postpone your dream — the opportunity is right now to own a professional website worthy of your ambition. The Web Design team awaits you for a free consultation, to discuss your ideas, and turn them into reality.</p><p class="mt-2 font-semibold text-white">Together we build an unforgettable digital presence.</p></div>` },
+    devAboutCard: { body: `<p>Who We Are: Your Partners in Turning Ideas into Digital Reality</p><p>In a digital world where change accelerates every day, a simple website is no longer enough; you need an interactive, fast, and secure digital identity that reflects the spirit of your brand and puts you ahead of the competition. At Web Development, we don't just build websites — we build integrated digital platforms that tell your story and serve your customers efficiently.</p><div><h4 class="font-bold text-lg mb-2 text-white">Our Story: A Passion for Technology and Design Mastery</h4><p>Our journey began years ago, when a team of creative engineers and UX/UI designers united around one vision: bridging the gap between attractive design and outstanding technical performance. We didn't want to be just a traditional software company; our ambition was to be the digital engine that drives businesses toward new horizons.</p><p class="mt-2">We started as a small project passionate about solving technical problems, and soon grew into an integrated team of elite developers specializing in the latest web technologies — from front-end development with React and Vue.js, to building powerful, complex back-end systems using Node.js, Laravel, and Python.</p></div><div><h4 class="font-bold text-lg mb-2 text-white">Our Philosophy: Excellence Begins with Understanding Your Needs</h4><p>At Web Development, we believe successful technology is the kind users don't feel — they only feel smooth performance and ease of use. That's why our philosophy rests on three core pillars:</p><ul class="list-disc list-inside mt-2 space-y-1"><li>Deep understanding: Before we write a single line of code, we listen to you. We study your industry, your target audience, and your strategic goals, because a successful website is not just code — it's a tool for achieving tangible business goals.</li><li>Technical excellence: We keep pace with the latest web technologies. We ensure your platforms are responsive, compatible with all devices, and SEO-optimized from day one, with the highest standards of security and protection.</li><li>Partnership and support: Our relationship with clients doesn't end at project delivery. We believe in long-term relationships, so we provide continuous technical support and flexible development plans so your platform grows alongside your business.</li></ul></div><div><h4 class="font-bold text-lg mb-2 text-white">Why Us? (Added Value)</h4><p>In a market full of options, what makes you choose us?</p><ul class="list-disc list-inside mt-2 space-y-1"><li>Custom solutions: We don't use ready-made templates. Every project we deliver is a unique artistic and technical piece, designed specifically to fit your identity and your specific needs.</li><li>Multidisciplinary team: We're not just developers. Our team includes UX designers, data analysts, and cybersecurity specialists, ensuring your final product is complete in every aspect.</li><li>Commitment to timelines: We know time is a key factor in any project's success. We stick to agreed delivery dates without compromising quality.</li></ul></div><div><h4 class="font-bold text-lg mb-2 text-white">Look to the Future Through Our Eyes</h4><p>We see every new project as an opportunity to make a real difference. Whether you're a startup dreaming of launching a revolutionary platform, an established brand seeking to renew its digital presence, or an e-commerce store aiming to expand into new markets, we are here to be the trusted technical partner you can rely on.</p><p class="mt-2">We are proud of the projects we've completed and the trust our clients have placed in us, and we eagerly look forward to collaborating with you on your next project. Let's create something exceptional together.</p></div><div><h4 class="font-bold text-lg mb-2 text-white">Contact Us Today</h4><p>Contact us today, and let's begin the journey of turning your vision into a stunning digital reality.</p></div>` },
+    ecomAboutCard: { body: `<p>We are not just a store — we are a passion turning into reality in your hands.</p><div><h4 class="font-bold text-lg mb-2 text-white">Opening Paragraph: (Defining the Essence)</h4><p>In a world where the pace keeps accelerating and choices keep overlapping, our idea was born out of challenge. We did not create this online store to be just another face in a long list of sellers — we came to redefine the meaning of online shopping. We are here to say that the digital experience can be warm, personal, and trustworthy, exactly as you imagine it.</p><p class="mt-2">We launched with a clear vision: providing exceptional products that meet your real needs, with a seamless shopping experience that makes you feel we live in your neighborhood, not behind a screen. We know that every product we place on our platform is not just a commodity, but a tool that improves your daily routine, adds a touch of beauty to your space, or is a gift carrying indescribable feelings. That is why we treat every detail as if it were meant for a member of our own family.</p></div><div><h4 class="font-bold text-lg mb-2 text-white">Chapter Two: (The Story of the Beginning and Passion)</h4><p>Every successful journey begins with a story, and our story began with a simple observation: the gap between the product quality the customer deserves and what the market offers. We were a group of friends and partners, united by experience in various fields — design, marketing, and supply chains — but we all agreed on one thing: quality can never be sacrificed for price, and the customer experience can never be overlooked, no matter the circumstances.</p><p class="mt-2">We decided to embark on this adventure not for quick profits, but to build a brand that lasts. We started by searching for the best sources, visiting exhibitions and factories, and testing thousands of products with our own hands before daring to show them to you. We did not rely only on attractive photos — we relied on real touch (as much as possible in our digital world), deep reading of every specification, and the constant question: "Would I buy this product for my mother or my friend?" If the answer was not a confident "yes", you will not find that product on our site.</p></div><div><h4 class="font-bold text-lg mb-2 text-white">Chapter Three: (Excellence in the World of E-commerce)</h4><p>We know that trust is the most precious currency on the internet. On average, a customer browses more than 5 sites before making a purchase decision, and we work hard to make our site the last stop. How do we do that?</p><p class="mt-2">Through transparency: we describe the product as it is, point out its flaws if any exist, and provide real photos from multiple angles.</p><p class="mt-2">Through knowledge: we do not just sell — we educate. In every product you will find a usage guide, care tips, and answers to the frequently asked questions that may come to your mind.</p><p class="mt-2">Through human service: our team is not just employees, but specialized consultants. When you contact us, you will find a human being who listens to you, understands your needs, and guides you to the best option that fits your budget and taste — not necessarily the most expensive one.</p><p class="mt-2">We also believe that sustainability is not just a buzzword. We constantly work to reduce the carbon footprint of our shipments, use eco-friendly packaging materials as much as possible, and partner with shipping companies that share the same values. We believe our service to the customer extends to serving the planet we live on.</p></div><div><h4 class="font-bold text-lg mb-2 text-white">Chapter Four: (Our Firm Values)</h4><p>These values are not just words on the wall of the site — they are the compass that guides every decision we make:</p><ul class="list-disc list-inside mt-2 space-y-1"><li>Quality first: our products undergo strict inspection standards before reaching the warehouse, and again before shipping to you.</li><li>Honesty with the customer: the delivery time we promise is a commitment, and the price you see is the best price we can offer without compromising quality.</li><li>Continuous innovation: we listen to your feedback, develop our store, learn from our mistakes, and always strive to deliver a better experience than yesterday.</li><li>The spirit of one team: we consider every customer a partner in our success journey, and every product we sell is the beginning of a relationship, not the end of a deal.</li></ul></div><div><h4 class="font-bold text-lg mb-2 text-white">Chapter Five: (Our Ambition for the Future)</h4><p>While we stand before you today with this platform, our eyes are set on distant horizons. We are not satisfied with being just a "store" — we aspire to be the destination of modern life. We are developing our technologies to deliver more interactive shopping experiences, such as augmented reality to try the product in your home before buying it, customer service powered by artificial intelligence but with a human touch, and a loyalty program that rewards every customer for their continued trust in us.</p><p class="mt-2">Our ambition is to reach every home and to be the first choice when the customer searches for quality and reliability. We want to hear in the future: "I bought it from that store — I trust them completely." That is our true success.</p></div><div><h4 class="font-bold text-lg mb-2 text-white">Conclusion and an Invitation to Connect</h4><p>In the end, we are here for you. This store is a reflection of your needs and aspirations. Do not hesitate to contact us with any question, inquiry, or even just a suggestion to improve our services. Our team is ready around the clock to serve you, because our success story is only complete when you are happy.</p><p class="mt-2">Thank you for being part of this journey. Welcome to our family.</p></div>` },
+  seoAboutCard: { body: `<p class="font-bold text-xl text-white">About Us — Dalia Ahmed, Your Trusted Partner in the World of SEO</p><p>In a rapidly changing digital world, the most important question remains: how do you make your business appear at the top of search results? At Dalia Ahmed, we believe success is not a coincidence — it is the product of a well-crafted strategy, a deep understanding of search algorithms, and a genuine passion for delivering results. We didn't come to be just a service provider; we came to be the strategic partner that drives your business to the top.</p><p>Since our launch, we've kept one goal in mind: turning visitors into customers, and improving your digital visibility so it truly reflects the value of your brand. We don't follow off-the-shelf solutions; we design a unique roadmap for each client that fits the size of their business and resonates with their ambitious goals.</p><div><h4 class="font-bold text-lg mb-2 text-white">Our Vision &amp; Mission: We Build Bridges Between Your Business and Your Audience</h4><p class="font-semibold text-white">Our Vision:</p><p>To be the leading digital agency in the region, known to everyone as the "leader maker" in search engine optimization, and to contribute to building a digital environment where small and large businesses thrive alike — through innovative and transparent solutions.</p><p class="mt-2 font-semibold text-white">Our Mission:</p><p>To empower businesses to take control of their digital presence through organic, sustainable SEO strategies built on precise data analysis, a deep understanding of user behavior, and the creation of valuable content that audiences love and search engines reward. We are committed to transparency and to delivering clear reports that show you the impact of every effort we make.</p></div><div><h4 class="font-bold text-lg mb-2 text-white">Why Choose Dalia Ahmed?</h4><p>We won't promise you the #1 spot overnight — those are unrealistic promises. But we do promise you a genuine, sustainable growth journey. Here's what sets us apart:</p><p class="font-semibold text-white">1. Data-Driven Strategies</p><p>We don't rely on guesswork. Every decision we make, every word we write, and every link we build is grounded in deep data analysis. We study your competitors, analyze your keywords, and understand your audience to place you in the right spot, at the right time, with the right words.</p><p class="mt-2 font-semibold text-white">2. Unmatched Expertise</p><p>Our team is a blend of data analysts, content creators, link-building specialists, and web developers. This integrated expertise allows us to treat every aspect of SEO as one unified system, ensuring comprehensive and harmonious results.</p><p class="mt-2 font-semibold text-white">3. Total Transparency</p><p>With us, you'll find no hidden agendas. We deliver control dashboards and detailed monthly reports that show you where we stand, what we've accomplished, and what's next. You'll always stay up to date on every detail of your campaign.</p><p class="mt-2 font-semibold text-white">4. Continuous Optimization and Persistent Follow-Up</p><p>The world of SEO never stops, and Google's algorithms are constantly changing. That's why we don't just do the work and wait for results. We monitor your performance daily and adjust our plans based on market changes and competitor performance to ensure your continued growth and dominance.</p></div><div><h4 class="font-bold text-lg mb-2 text-white">Our Story: A Passionate Journey Into Digital</h4><p>Our story began in 2021, when our team noticed a big gap between what marketing agencies offered and what clients really needed. Most solutions were either too complicated, not transparent, or simply didn't deliver real results.</p><p class="mt-2">We decided to change the equation. We started as a small office, united by a passion for data science and content marketing. Over time, with every client's success, we grew and expanded — but we kept our core: sincerity in work, commitment to quality, and a constant pursuit of creativity.</p><p class="mt-2">Today, we proudly carry the trust of hundreds of clients who placed their digital future in our hands. Our story is a story of growth — not just of an agency, but of a true partnership with every client as we walk together on a long road toward success.</p></div><div><h4 class="font-bold text-lg mb-2 text-white">Our Core SEO Services</h4><p>We offer an integrated suite of SEO services designed to cover all your needs:</p><ul class="list-disc list-inside mt-2 space-y-1"><li>On-Page SEO: Optimizing your site's content, URL structure, and meta tags to be search-engine friendly and an enjoyable read for users.</li><li>Off-Page SEO: Building a strong network of high-quality backlinks from trusted websites to boost your site's authority in Google's eyes.</li><li>SEO Audits: A comprehensive examination of your site to identify strengths and weaknesses, plus a clear action plan for fixes and improvements.</li><li>Competitor Analysis: Studying your competitors' strategies in full and turning their weaknesses into your strengths.</li><li>SEO Consulting: Consulting sessions with our experts to help you shape your strategies and accelerate your growth.</li></ul></div><div><h4 class="font-bold text-lg mb-2 text-white">Let's Start Your Journey to the Top</h4><p>At Dalia Ahmed, we believe the potential of your business is limitless, and we're here to help you unlock it. We're not looking for clients — we're looking for success partners. If you're searching for a trusted partner who puts your interests above everything else, and has the expertise and tools to take you where you deserve to be, we're the perfect choice.</p><p class="mt-2">Contact us today and let's start a serious conversation about your digital future. Together, we'll write your next success story.</p></div>` },
+  },
+  ar: {
+    nav: { home: 'الرئيسية', services: 'خدماتنا', about: 'من نحن', portfolio: 'أعمالنا', process: 'طريقة عملنا', testimonials: 'آراء العملاء', contact: 'اتصل بنا' },
+    cta: { getStarted: 'ابدأ الآن', viewPortfolio: 'شاهد أعمالنا' },
+    hero: { available: 'متاحون لمشاريع جديدة', title: 'حوّل عملك إلى <span class="gradient-text">قصة نجاح رقمية</span>', subtitle: 'نصنع مواقع ويب مذهلة وحلولاً رقمية قوية وحملات تسويقية عالية التحويل تساعد علامتك التجارية على النمو بشكل أسرع.', scroll: 'مرر للأسفل', trust: { projects: 'مشاريع', satisfaction: 'رضا العملاء', years: 'سنوات خبرة' } },
+    meta: { title: 'داليا أحمد — وكالة رقمية | تصميم وتطوير وتسويق', desc: 'وكالة داليا أحمد الرقمية — نصنع مواقع ويب مذهلة وحلولاً رقمية قوية وحملات تسويقية عالية التحويل تساعد العلامات التجارية على النمو بشكل أسرع.' },
+    loader: { text: 'جارٍ التحميل…' },
+    services: {
+      webDesign: { title: 'تصميم المواقع', desc: 'تصاميم مذهلة ومتجاوبة تخطف انتباه الزوار وتترك انطباعاً دائماً.' },
+      webDevelopment: { title: 'تطوير المواقع', desc: 'تطبيقات ويب قوية وقابلة للتوسع مبنية بأحدث التقنيات.' },
+      ecom: { title: 'متاجر التجارة الإلكترونية', desc: 'متاجر إلكترونية عالية التحويل تحوّل المتصفحين إلى عملاء أوفياء.' },
+      seo: { title: 'تحسين محركات البحث', desc: 'الهيمنة على ترتيب البحث وجذب زيارات عضوية إلى موقعك.' },
+      digitalMarketing: { title: 'التسويق الرقمي', desc: 'استراتيجيات تسويق مبنية على البيانات تزيد العائد على الاستثمار وتغذي النمو.' },
+      adCampaigns: { title: 'حملات إعلانية', desc: 'حملات إعلانية مستهدفة تصل إلى الجمهور المناسب في الوقت المناسب.' },
+      socialMedia: { title: 'التواصل الاجتماعي', desc: 'استراتيجيات اجتماعية جذابة تبني مجتمعاً وتضخّم حضور علامتك التجارية.' },
+      brandIdentity: { title: 'هوية العلامة التجارية', desc: 'هويات تجارية لا تُنسى تتردد صداها لدى جمهورك المستهدف.' }
+    },
+    about: {
+      subtitle: 'سجلنا الحافل بالتميز والالتزام بالنتائج يميزنا عن الآخرين.',
+      stats: { projects: 'مشروع مكتمل', satisfaction: 'رضا العملاء', support: 'دعم متاح', years: 'سنوات خبرة' },
+      features: {
+        reliable: { title: 'موثوقون وجديرون بالثقة', desc: 'نبني شراكات دائمة قائمة على الثقة والشفافية والالتزام بالتسليم المستمر.' },
+        fast: { title: 'تسليم سريع', desc: 'نلتزم بالمواعيد دون المساس بالجودة. وقتك هو أولويتنا.' },
+        support: { title: 'دعم مخصص', desc: 'دعم على مدار الساعة من فريقنا الخبير. نحن دائماً في خدمتك.' }
+      }
+    },
+    portfolio: {
+      subtitle: 'اكتشف أحدث مشاريعنا وشاهد كيف ساعدنا الشركات على تحويل حضورها الرقمي.',
+      filters: { all: 'الكل', webDesign: 'تصميم المواقع', ecom: 'التجارة الإلكترونية', branding: 'العلامات التجارية', marketing: 'التسويق' },
+      items: {
+        techVision: { title: 'منصة TechVision', tag: 'تصميم وتطوير مواقع' },
+        luxe: { title: 'متجر Luxe للأزياء', tag: 'حل تجارة إلكترونية' },
+        apex: { title: 'هوية Apex التجارية', tag: 'تصميم علامة تجارية' },
+        growthFlow: { title: 'حملة GrowthFlow', tag: 'تسويق رقمي' },
+        fintech: { title: 'لوحة FinTech', tag: 'تطبيق ويب' },
+        organic: { title: 'سوق Organic', tag: 'متجر إلكتروني' }
+      }
+    },
+    process: {
+      subtitle: 'عملية مجربة تحوّل رؤيتك إلى واقع رقمي قوي.',
+      step1: { title: 'الاكتشاف', desc: 'نغوص بعمق في أهداف عملك وجمهورك ومشهدك التنافسي لبناء أساس متين.' },
+      step2: { title: 'الاستراتيجية', desc: 'نضع استراتيجية شاملة تتماشى مع أهدافك وتعظم إمكاناتك الرقمية.' },
+      step3: { title: 'التصميم', desc: 'مصممونا يصنعون واجهات مذهلة تركز على المستخدم وترتقي بعلامتك التجارية.' },
+      step4: { title: 'التطوير', desc: 'نحوّل التصاميم إلى حياة عبر كود نظيف وفعّال وأحدث التقنيات.' },
+      step5: { title: 'الإطلاق', desc: 'نضمن إطلاقاً مثالياً عبر اختبار شامل وتحسين ودعم مستمر.' }
+    },
+    testimonials: {
+      slide1: { quote: '"حوّلت داليا أحمد حضورنا الرقمي بالكامل. الموقع الذي بنوه ليس جميلاً فحسب — بل هو آلة تحويل. زادت مبيعاتنا بنسبة 200% خلال ثلاثة أشهر!"', name: 'سارة ميتشل', role: 'الرئيس التنفيذي، TechVision Inc.' },
+      slide2: { quote: '"تفاني الفريق في التفاصيل ونهجه الإبداعي تجاوزا كل توقعاتنا. إنهم لا يسلّمون مشاريع فقط — بل يقدمون تجارب تُبهر العملاء."', name: 'جيمس رودريغيز', role: 'مؤسس، GrowthFlow' },
+      slide3: { quote: '"العمل مع داليا أحمد كان نقطة تحول. استراتيجياتهم في تحسين محركات البحث والتسويق وضعتنا في الصفحة الأولى على جوجل. العائد كان مذهلاً!"', name: 'إيميلي تشين', role: 'مديرة التسويق، Apex Co.' },
+      slide4: { quote: '"من الهوية التجارية إلى إدارة وسائل التواصل الاجتماعي، نُفّذ كل شيء بإتقان. فريق داليا أحمد يفهم المشهد الرقمي حقاً."', name: 'مايكل بارك', role: 'مدير العمليات، NovaBrand' }
+    },
+    contact: { start: 'ابدأ مشروعك', emailUs: 'راسلنا', emailLabel: 'البريد الإلكتروني', phoneLabel: 'الهاتف', locationLabel: 'الموقع' },
+    footer: {
+      desc: 'نحوّل الشركات إلى قصص نجاح رقمية من خلال حلول مبتكرة في التصميم والتطوير والتسويق.',
+      services: 'خدماتنا',
+      quickLinks: 'روابط سريعة',
+      serviceLinks: { webDesign: 'تصميم المواقع', webDevelopment: 'تطوير المواقع', ecom: 'حلول التجارة الإلكترونية', seo: 'تحسين محركات البحث', marketing: 'التسويق الرقمي', brand: 'هوية العلامة التجارية' },
+      quick: { home: 'الرئيسية', about: 'من نحن', portfolio: 'أعمالنا', process: 'طريقة عملنا', testimonials: 'آراء العملاء', contact: 'اتصل بنا' },
+      copyright: '© 2025 داليا أحمد. جميع الحقوق محفوظة.',
+      privacy: 'سياسة الخصوصية',
+      terms: 'شروط الخدمة'
+    },
+    newsletter: { title: 'ابقَ على اطلاع', desc: 'اشترك في نشرتنا لأحدث النصائح والتحديثات.', placeholder: 'بريدك الإلكتروني', btn: 'اشترك', sending: 'جارٍ الإرسال…', success: 'شكراً لاشتراكك!', error: 'حدث خطأ ما. حاول مرة أخرى.', invalid: 'يرجى إدخال بريد إلكتروني صحيح.' },
+    sections: { servicesLabel: 'خدماتنا', servicesTitle: 'حلول رقمية <span class="gradient-text">متميزة</span>', servicesText: 'نقدم مجموعة شاملة من الخدمات الرقمية المصممة لرفع علامتك التجارية وتسريع نموك.', aboutLabel: 'لماذا تختارنا', aboutTitle: 'أرقام <span class="gradient-text">تتحدث</span>', portfolioLabel: 'أعمالنا', portfolioTitle: 'أعمال <span class="gradient-text">مميزة</span>', processLabel: 'طريقة عملنا', processTitle: 'كيف <span class="gradient-text">نعمل</span>', testimonialsLabel: 'آراء العملاء', testimonialsTitle: 'ماذا يقول <span class="gradient-text">عملاؤنا</span>', contactLabel: 'لنتحدث', contactTitle: 'جاهز للنمو<br><span class="gradient-text">عملك؟</span>', contactText: 'دعنا نحوّل رؤيتك إلى واقع. تواصل معنا اليوم واكتشف كيف نستطيع تحويل حضورك الرقمي.' },
+    aboutCard: { body: `<p>نبني جسوراً بين الأفكار والواقع الرقمي.</p><p>في عالم تتسارع فيه التحولات الرقمية، نؤمن أن الموقع الإلكتروني ليس مجرد صفحات على الإنترنت — بل هو المرآة الحقيقية لعلامتك التجارية ونقطة التواصل الأولى مع جمهورك. لهذا أنشأنا تصميم المواقع لنقدم تجربة مختلفة في عالم تصميم المواقع؛ تجربة تجمع بين الإبداع البصري، والبرمجة المتقنة، والفهم العميق لاحتياجات العملاء.</p><p>لسنا مجرد مصممين — نحن شركاء نجاح نعمل جنباً إلى جنب مع عملائنا لتحويل أحلامهم الرقمية إلى منصات تفاعلية مؤثرة تعكس هويتهم وتقوّي حضورهم وتحقق أهدافهم التجارية.</p><div><h4 class="font-bold text-lg mb-2 text-white">رؤيتنا: تصميم يُلهم ويُؤثر</h4><p>نطمح أن نكون الوجهة الأولى في الشرق الأوسط لكل من يبحث عن تصميم مواقع احترافي يجمع بين:</p><ul class="list-disc list-inside mt-2 space-y-1"><li>جماليات عصرية تخطف الانتباه.</li><li>سهولة استخدام تجعل التجربة سلسة وممتعة.</li><li>أداء تقني قوي يضمن سرعة وأماناً لا مثيل لهما.</li></ul><p class="mt-2">نؤمن أن التصميم الجيد هو الذي لا يُلاحظ لأنه يبدو طبيعياً — لكنه في الحقيقة ثمرة آلاف الساعات من التفكير والإبداع. نسعى دائماً أن يكون كل موقع نسلّمه عملاً فنياً وأداة تسويقية في آن واحد.</p></div><div><h4 class="font-bold text-lg mb-2 text-white">رسالتنا: نبني تجارب، لا مواقع فقط</h4><p>رسالتنا بسيطة وواضحة: تحويل احتياجاتك إلى حلول رقمية مبتكرة مع التزام كامل بالجودة والدقة والالتزام بالمواعيد. نضع عميلنا في قلب كل قرار تصميمي، نستمع لأفكارهم ونترجمها إلى واجهات تفاعلية تعظم القيمة للمستخدم النهائي.</p><p class="mt-2">نؤمن أن كل مشروع فريد، لذلك نقدم حلولاً مخصصة تناسب حجم عملك ومجالك ورؤيتك المستقبلية. سواء كنت شركة ناشئة أو مؤسسة قائمة أو فرداً يطلق هويته الرقمية، فنحن هنا لدعمك في كل خطوة على الطريق.</p></div><div><h4 class="font-bold text-lg mb-2 text-white">فريقنا: خبرة وشغف وإبداع</h4><p>يتكون فريق تصميم المواقع من نخبة المصممين والمطورين وخبراء تجربة المستخدم (UX/UI) تجمعهم شغف واحد: صناعة محتوى رقمي مميز. لكل عضو خلفية غنية في مجاله ويواكب أحدث التقنيات والاتجاهات في تصميم المواقع.</p><ul class="list-disc list-inside mt-2 space-y-1"><li>المصممون يصنعون هويات بصرية تعبّر عنك.</li><li>المطورون يحوّلون التصاميم إلى كود نظيف وسريع متوافق مع جميع الأجهزة.</li><li>خبراء تجربة المستخدم يضمنون لكل زائر تجربة لا تُنسى.</li><li>فريق الدعم يبقى على تواصل دائم لضمان رضاك الكامل.</li></ul></div><div><h4 class="font-bold text-lg mb-2 text-white">لماذا نحن؟ (مفاتيح التميز لدينا)</h4><ul class="space-y-1"><li>? تصاميم حصرية ومبتكرة — لا ننسخ قوالب جاهزة، بل نبني تصميماً فريداً من الصفر.</li><li>? أداء تقني استثنائي — مواقعنا سريعة وآمنة ومحسّنة لمحركات البحث.</li><li>? متجاوبة بالكامل مع جميع الأجهزة — موقعك يبدو مثالياً على الهواتف والأجهزة اللوحية وأجهزة الكمبيوتر.</li><li>? التزام بالمواعيد والجودة — نضع جدولاً زمنياً واضحاً ونلتزم به، ونسلّم عملاً متقناً.</li><li>? دعم فني مستمر — لا نتركك بعد التسليم، بل نوفر المتابعة والتحديثات لإبقاء موقعك متميزاً.</li><li>? أسعار تنافسية — أفضل قيمة مقابل سعر عادل يناسب الجميع.</li></ul></div><div><h4 class="font-bold text-lg mb-2 text-white">شراكات النجاح</h4><p>عملنا مع أكثر من 200 عميل في مجالات متنوعة: متاجر التجارة الإلكترونية، المنصات التعليمية، شركات العقارات، المطاعم، العيادات الطبية، المدونات، والمؤسسات الحكومية والخاصة. كل مشروع كان قصة نجاح جديدة، وكل عميل أصبح جزءاً من عائلة تصميم المواقع.</p><p class="mt-2">نفخر بأن نسبة كبيرة من عملائنا تعود إلينا لتطوير مواقعهم أو إطلاق مشاريع جديدة — وهذا أكبر دليل على ثقتهم بنا وبجودة ما نقدمه.</p></div><div><h4 class="font-bold text-lg mb-2 text-white">مستقبلنا معاً</h4><p>في تصميم المواقع، لا ننظر إلى المشاريع كمجرد عقود؛ بل نراها بداية شراكة طويلة الأمد. يسعدنا مشاهدة نمو عملائنا وتطورهم، وأن نكون جزءاً من رحلتهم نحو النجاح الرقمي.</p><p class="mt-2">إذا كنت تبحث عن:</p><ul class="list-disc list-inside mt-2 space-y-1"><li>تصميم موقع جديد يعبّر عن هويتك.</li><li>إعادة تصميم موقعك الحالي لتحديثه وتطويره.</li><li>استشارة رقمية لتحسين أداء موقعك وزيادة مبيعاتك.</li></ul><p class="mt-2">فأنت في المكان الصحيح.</p></div><div><h4 class="font-bold text-lg mb-2 text-white">تواصل معنا وابدأ رحلتك الرقمية</h4><p>لا تؤجل حلمك — الفرصة الآن لامتلاك موقع احترافي يليق بطموحك. فريق تصميم المواقع في انتظارك لاستشارة مجانية، لمناقشة أفكارك وتحويلها إلى واقع.</p><p class="mt-2 font-semibold text-white">معاً نبني حضوراً رقمياً لا يُنسى.</p></div>` },
+    devAboutCard: { body: `<p>من نحن: شركاؤك في تحويل الأفكار إلى واقع رقمي</p><p>في عالم رقمي يتسارع تغيره كل يوم، لم يعد الموقع البسيط كافياً؛ أنت بحاجة إلى هوية رقمية تفاعلية وسريعة وآمنة تعكس روح علامتك التجارية وتضعك في المقدمة. في تطوير المواقع، لا نبني مواقع فقط — بل نبني منصات رقمية متكاملة تروي قصتك وتخدم عملاءك بكفاءة.</p><div><h4 class="font-bold text-lg mb-2 text-white">قصتنا: شغف بالتكنولوجيا وإتقان للتصميم</h4><p>بدأت رحلتنا منذ سنوات، عندما اجتمع فريق من المهندسين المبدعين ومصممي تجربة المستخدم حول رؤية واحدة: سد الفجوة بين التصميم الجذاب والأداء التقني المتميز. لم نرد أن نكون مجرد شركة برمجيات تقليدية؛ كان طموحنا أن نكون المحرك الرقمي الذي يقود الشركات نحو آفاق جديدة.</p><p class="mt-2">بدأنا كمشروع صغير شغوف بحل المشكلات التقنية، وسرعان ما نمونا إلى فريق متكامل من نخبة المطورين المتخصصين في أحدث تقنيات الويب — من تطوير الواجهات الأمامية بـ React و Vue.js، إلى بناء أنظمة خلفية قوية ومعقدة باستخدام Node.js و Laravel و Python.</p></div><div><h4 class="font-bold text-lg mb-2 text-white">فلسفتنا: التميز يبدأ بفهم احتياجاتك</h4><p>في تطوير المواقع، نؤمن أن التكنولوجيا الناجحة هي التي لا يشعر بها المستخدم — فهو يشعر فقط بالأداء السلس وسهولة الاستخدام. لذلك تقوم فلسفتنا على ثلاث ركائز أساسية:</p><ul class="list-disc list-inside mt-2 space-y-1"><li>الفهم العميق: قبل أن نكتب سطراً واحداً من الكود، نستمع إليك. ندرس مجالك وجمهورك المستهدف وأهدافك الاستراتيجية، لأن الموقع الناجح ليس مجرد كود — بل أداة لتحقيق أهداف تجارية ملموسة.</li><li>التميز التقني: نواكب أحدث تقنيات الويب. نضمن أن منصاتك متجاوبة ومتوافقة مع جميع الأجهزة ومحسّنة لمحركات البحث منذ اليوم الأول، مع أعلى معايير الأمان والحماية.</li><li>الشراكة والدعم: علاقتنا بالعملاء لا تنتهي عند تسليم المشروع. نؤمن بالعلاقات طويلة الأمد، لذا نوفر دعماً فنياً مستمراً وخطط تطوير مرنة لينمو منصتك جنباً إلى جنب مع أعمالك.</li></ul></div><div><h4 class="font-bold text-lg mb-2 text-white">لماذا نحن؟ (القيمة المضافة)</h4><p>في سوق مليء بالخيارات، ما الذي يجعلك تختارنا؟</p><ul class="list-disc list-inside mt-2 space-y-1"><li>حلول مخصصة: لا نستخدم قوالب جاهزة. كل مشروع نسلّمه قطعة فنية وتقنية فريدة مصممة خصيصاً لتناسب هويتك واحتياجاتك.</li><li>فريق متعدد التخصصات: لسنا مطورين فقط. فريقنا يضم مصممي تجربة المستخدم ومحللي البيانات وخبراء الأمن السيبراني، مما يضمن منتجاً نهائياً مكتملاً في كل جوانبه.</li><li>الالتزام بالمواعيد: نعرف أن الوقت عامل أساسي في نجاح أي مشروع. نلتزم بمواعيد التسليم المتفق عليها دون المساس بالجودة.</li></ul></div><div><h4 class="font-bold text-lg mb-2 text-white">انظر إلى المستقبل من خلال عيوننا</h4><p>نرى كل مشروع جديد فرصة لإحداث فرق حقيقي. سواء كنت شركة ناشئة تحلم بإطلاق منصة ثورية، أو علامة تجارية راسخة تسعى لتجديد حضورها الرقمي، أو متجر تجارة إلكترونية يهدف للتوسع في أسواق جديدة، فنحن هنا لنكون الشريك التقني الموثوق الذي تعتمد عليه.</p><p class="mt-2">نفخر بالمشاريع التي أنجزناها وبالثقة التي وضعها عملاؤنا فينا، ونتطلع بشغف إلى التعاون معك في مشروعك القادم. لنصنع شيئاً استثنائياً معاً.</p></div><div><h4 class="font-bold text-lg mb-2 text-white">تواصل معنا اليوم</h4><p>تواصل معنا اليوم، ولنبدأ رحلة تحويل رؤيتك إلى واقع رقمي مذهل.</p></div>` },
+    ecomAboutCard: { body: `<p>لسنا مجرد متجر — نحن شغف يتحول إلى واقع بين يديك.</p><div><h4 class="font-bold text-lg mb-2 text-white">فقرة الافتتاح: (تحديد الجوهر)</h4><p>في عالم تتسارع فيه الوتيرة وتتداخل فيه الخيارات، وُلدت فكرتنا من التحدي. لم ننشئ هذا المتجر لنكون مجرد وجه آخر في قائمة طويلة من البائعين — بل جئنا لنعيد تعريف معنى التسوق عبر الإنترنت. نحن هنا لنقول إن التجربة الرقمية يمكن أن تكون دافئة وشخصية وجديرة بالثقة، تماماً كما تتخيلها.</p><p class="mt-2">انطلقنا برؤية واضحة: تقديم منتجات استثنائية تلبي احتياجاتك الحقيقية، مع تجربة تسوق سلسة تشعرك أننا في حيّك، وليس خلف شاشة. نعرف أن كل منتج نضعه على منصتنا ليس مجرد سلعة، بل أداة تحسّن روتينك اليومي وتضيف لمسة جمال لمساحتك أو هدية تحمل مشاعر لا توصف. لذلك نتعامل مع كل تفصيلة وكأنها مخصصة لفرد من عائلتنا.</p></div><div><h4 class="font-bold text-lg mb-2 text-white">الفصل الثاني: (قصة البداية والشغف)</h4><p>تبدأ كل رحلة ناجحة بقصة، وبدأت قصتنا بملاحظة بسيطة: الفجوة بين جودة المنتج الذي يستحقه العميل وما يعرضه السوق. كنا مجموعة من الأصدقاء والشركاء يجمعنا خبرة في مجالات متنوعة — التصميم والتسويق وسلاسل التوريد — لكننا اتفقنا جميعاً على شيء واحد: الجودة لا يمكن أبداً التضحية بها من أجل السعر، وتجربة العميل لا يمكن إهمالها مهما كانت الظروف.</p><p class="mt-2">قررنا خوض هذه المغامرة ليس من أجل أرباح سريعة، بل لبناء علامة تدوم. بدأنا بالبحث عن أفضل المصادر، وزيارة المعارض والمصانع، واختبار آلاف المنتجات بأيدينا قبل أن نتجرأ على عرضها عليك. لم نعتمد فقط على صور جذابة — بل اعتمدنا على اللمس الحقيقي قدر الإمكان في عالمنا الرقمي، والقراءة العميقة لكل مواصفة، والسؤال الدائم: "هل سأشتري هذا المنتج لأمي أو لصديقي؟" إن لم تكن الإجابة "نعم" واثقة، فلن تجد هذا المنتج على موقعنا.</p></div><div><h4 class="font-bold text-lg mb-2 text-white">الفصل الثالث: (التميز في عالم التجارة الإلكترونية)</h4><p>نعرف أن الثقة هي العملة الأثمن على الإنترنت. في المتوسط، يتصفح العميل أكثر من 5 مواقع قبل اتخاذ قرار الشراء، ونعمل جاهدين لنجعل موقعنا المحطة الأخيرة. كيف نفعل ذلك؟</p><p class="mt-2">من خلال الشفافية: نصف المنتج كما هو، ونوضح عيوبه إن وُجدت، ونقدم صوراً حقيقية من زوايا متعددة.</p><p class="mt-2">من خلال المعرفة: نحن لا نبيع فحسب — بل نعلّم. في كل منتج ستجد دليل استخدام ونصائح للعناية وإجابات عن الأسئلة الشائعة التي قد تخطر ببالك.</p><p class="mt-2">من خلال الخدمة الإنسانية: فريقنا ليس مجرد موظفين، بل مستشارون متخصصون. عندما تتواصل معنا ستجد إنساناً يستمع إليك ويفهم احتياجاتك ويرشدك إلى الخيار الأفضل الذي يناسب ميزانيتك وذوقك — وليس بالضرورة الأغلى.</p><p class="mt-2">نؤمن أيضاً أن الاستدامة ليست مجرد شعار. نعمل باستمرار على تقليل البصمة الكربونية لشحناتنا، ونستخدم مواد تغليف صديقة للبيئة قدر الإمكان، ونشترك مع شركات شحن تشاركنا القيم نفسها. نؤمن أن خدمتنا للعميل تمتد لتشمل خدمة الكوكب الذي نعيش عليه.</p></div><div><h4 class="font-bold text-lg mb-2 text-white">الفصل الرابع: (قيمنا الراسخة)</h4><p>هذه القيم ليست مجرد كلمات على جدران الموقع — إنها البوصلة التي توجه كل قرار نتخذه:</p><ul class="list-disc list-inside mt-2 space-y-1"><li>الجودة أولاً: تخضع منتجاتنا لمعايير فحص صارمة قبل وصولها إلى المخزن، ومرة أخرى قبل شحنها إليك.</li><li>الصدق مع العميل: وقت التسليم الذي نعدك به هو التزام، والسعر الذي تراه هو أفضل سعر نستطيع تقديمه دون التضحية بالجودة.</li><li>الابتكار المستمر: نستمع لملاحظاتك ونطوّر متجرنا ونتعلم من أخطائنا ونسعى دائماً لتقديم تجربة أفضل من الأمس.</li><li>روح الفريق الواحد: نعتبر كل عميل شريكاً في رحلة نجاحنا، وكل منتج نبيعه بداية علاقة وليس نهاية صفقة.</li></ul></div><div><h4 class="font-bold text-lg mb-2 text-white">الفصل الخامس: (طموحنا للمستقبل)</h4><p>بينما نقف أمامك اليوم مع هذه المنصة، عيوننا على آفاق بعيدة. نحن لا نكتفي بكوننا "متجراً" — بل نطمح أن نكون وجهة الحياة العصرية. نطوّر تقنياتنا لنقدم تجارب تسوق أكثر تفاعلاً، مثل الواقع المعزز لتجربة المنتج في منزلك قبل شرائه، وخدمة عملاء مدعومة بالذكاء الاصطناعي ولكن بلمسة إنسانية، وبرنامج ولاء يكافئ كل عميل على ثقته المستمرة بنا.</p><p class="mt-2">طموحنا أن نصل إلى كل منزل وأن نكون الخيار الأول عندما يبحث العميل عن الجودة والموثوقية. نريد أن نسمع في المستقبل: "اشتريت من ذلك المتجر — أثق بهم تماماً." هذا هو نجاحنا الحقيقي.</p></div><div><h4 class="font-bold text-lg mb-2 text-white">الخاتمة ودعوة للتواصل</h4><p>في النهاية، نحن هنا لأجلك. هذا المتجر انعكاس لاحتياجاتك وتطلعاتك. لا تتردد في التواصل معنا لأي سؤال أو استفسار أو حتى مجرد اقتراح لتحسين خدماتنا. فريقنا جاهز على مدار الساعة لخدمتك، لأن قصة نجاحنا لا تكتمل إلا عندما تكون سعيداً.</p><p class="mt-2">شكراً لكونك جزءاً من هذه الرحلة. أهلاً بك في عائلتنا.</p></div>` },
+    seoAboutCard: { body: `<p class="font-bold text-xl text-white">من نحن — داليا احمد، شريكك الموثوق في عالم تحسين محركات البحث (SEO)</p><p>في عالم رقمي سريع التغير، يبقى السؤال الأهم: كيف تجعل عملك يظهر في مقدمة نتائج البحث؟ في داليا احمد، نؤمن أن النجاح ليس صدفة — بل ثمرة استراتيجية مدروسة وفهم عميق لخوارزميات البحث وشغف حقيقي بتقديم النتائج. لم نأتِ لنكون مجرد مزود خدمة؛ جئنا لنكون الشريك الاستراتيجي الذي يقود أعمالك إلى القمة.</p><p>منذ انطلاقتنا، أبقينا هدفاً واحداً في أذهاننا: تحويل الزوار إلى عملاء، وتحسين ظهورك الرقمي ليعكس قيمة علامتك التجارية حقاً. لا نتبع حلولاً جاهزة؛ بل نصمم لكل عميل خارطة طريق فريدة تناسب حجم أعماله وتتناغم مع أهدافه الطموحة.</p><div><h4 class="font-bold text-lg mb-2 text-white">رؤيتنا ورسالتنا: نبني جسوراً بين عملك وجمهورك</h4><p class="font-semibold text-white">رؤيتنا:</p><p>أن نكون الوكالة الرقمية الرائدة في المنطقة، وأن نُعرف للجميع بأننا "صانع القادة" في تحسين محركات البحث، وأن نساهم في بناء بيئة رقمية تزدهر فيها الشركات الصغيرة والكبيرة على حد سواء — من خلال حلول مبتكرة وشفافة.</p><p class="mt-2 font-semibold text-white">رسالتنا:</p><p>تمكين الشركات من السيطرة على حضورها الرقمي من خلال استراتيجيات SEO عضوية ومستدامة مبنية على تحليل دقيق للبيانات وفهم عميق لسلوك المستخدم وإنتاج محتوى قيم يحبه الجمهور وتكافئه محركات البحث. نحن ملتزمون بالشفافية وتقديم تقارير واضحة تظهر لك أثر كل جهد نبذله.</p></div><div><h4 class="font-bold text-lg mb-2 text-white">لماذا تختار داليا احمد؟</h4><p>لن نعدك بالمقص الأول بين عشية وضحاها — فهذه وعود غير واقعية. لكننا نعدك برحلة نمو حقيقية ومستدامة مبنية على البيانات وتقارير شفافة وتحسين مستمر.</p><p class="font-semibold text-white">1. النهج القائم على البيانات (Data-Driven)</p><p>لا نعمل بالتخمين. نحلل أداءك الحالي ونحدد الفرص والتهديدات داخل أسواقك، ثم نبني خطة مبنية على أرقام وأدوات تحليل دقيقة لضمان تقدم سريع وواضح.</p><p class="mt-2 font-semibold text-white">2. الحقيقة لا الوعود</p><p>نقول لك الحقيقة حول ما يمكن تحقيقه في الفترة الزمنية المحددة. إذا كانت بعض الأهداف تتطلب وقتاً أطول، نوضح ذلك بوضوح. نقدّم تقارير شهرية صادقة توضح ما تحقق وما لا يزال قيد التنفيذ.</p><p class="mt-2 font-semibold text-white">3. المحتوى هو الملك</p><p>ندرك أن المحتوى الناجح يجب أن يقنع البشر أولاً قبل محركات البحث. نكتب محتوى يحل مشاكل حقيقية بإجابات مفيدة، ونجعله سهل القراءة والتصفح، محسّناً بذكاء لمحركات البحث.</p><p class="mt-2 font-semibold text-white">4. استمرارية النتائج على المدى البعيد</p><p>نعمل معك لبناء حضور رقمي متين طويل الأجل، وليس مجرد تحسينات مؤقتة. نضع الأساس الصحيح الذي يبني عليه موقعك قوة متزايدة في محركات البحث.</p></div><div><h4 class="font-bold text-lg mb-2 text-white">علاماتنا الزمنية: سنوات من التقدم والنجاحات</h4><p>بدأنا رحلتنا في عام 2021، ومنذ ذلك الحين قمنا بتحسين ظهور العشرات من الشركات في محركات البحث. في تلك السنوات، تعلمنا كثيراً وبنينا سمعة قوية في السوق.</p><p class="mt-2">واجهنا التحديات بنجاح وحققنا إنجازات نفخر بها. نحن أكثر وكالات SEO فهماً لاحتياجات السوق العربي، لأننا نعرف أسواقنا جيداً ونقود شركاءنا بحكمة.</p><p class="mt-2">اليوم، نمتلك خبرة حقيقية عملية في مختلف القطاعات، وننقل لشركائنا كل ما نعرفه لنجعلهم يصنعون أثراً ملموساً في عالم البحث.</p></div><div><h4 class="font-bold text-lg mb-2 text-white">خدماتنا المميزة في عالم تحسين محركات البحث</h4><p>نقدم لك مجموعة شاملة من خدمات SEO نصممها لتحقيق أفضل النتائج:</p><ul class="list-disc list-inside mt-2 space-y-1"><li>SEO الداخلي (On-Page): نحسّن هيكل موقعك وعناوينه ووسوم الميتا (Meta Tags) وتجربة المستخدم، ونجعل المحتوى أسهل قراءة وأكثر صلة بمحركات البحث.</li><li>SEO الخارجي (Off-Page): ننشئ شبكة قوية من الروابط الخلفية (Backlinks) عالية الجودة من مواقع موثوقة لرفع تصنيف موقعك بفعالية.</li><li>التدقيق الشامل (SEO Audit): نفحص موقعك بالكامل (تقنياً وبنيوياً) للكشف عن الأخطاء والعوائق التي قد تعيق تصنيفه.</li><li>تحليل المنافسين (Competitor Analysis): ندرس استراتيجيات منافسيك ونكتشف الفجوات والفرص التي يمكننا استغلالها لصالحك.</li><li>صيانة SEO: نراقب صحة موقعك تقنياً باستمرار ونحافظ على استمرارية عمله بفعالية عالية.</li></ul></div><div><h4 class="font-bold text-lg mb-2 text-white">ابدأ رحلتك نحو النجاح الآن</h4><p>مع داليا احمد، ستكتشف ما يمكن تحقيقه عندما تجتمع الخبرة الحقيقية والبيانات الدقيقة والاستراتيجيات الذكية. نحن لا نعدك بعجائب بين عشية وضحاها، لكننا نعدك بشراكة تعمل بجد لتنمية أعمالك واستمرارية نتائجك.</p><p class="mt-2">إذا كنت مستعداً لاتخاذ الخطوة الحقيقية نحو التميز الرقمي، فإن الباب مفتوح لك. تواصل معنا، ودعنا نحلل فرصك ونرى معاً ما يمكن صنعه.</p></div>` }
+  }
+};
+
+// ====== TYPING QUOTES (EN/AR) ======
+const quotesEn = [
+    "We Don't Just Build Websites — We Build Digital Empires",
+    "Your Vision, Our Code — Together We Create Magic",
+    "Innovation Distinguishes Between a Leader and a Follower",
+    "Great Design Is Not Just What You See — It's What You Feel",
+    "Turning Bold Ideas Into Digital Reality",
+    "Where Creativity Meets Technology",
+    "Your Success Is Our Mission",
+    "Design Is the Silent Ambassador of Your Brand",
+    "We Make the Impossible — Possible",
+    "Excellence Is Not a Skill — It's an Attitude"
+];
+
+
+const quotesAr = [
+    "نحن لا نبني مواقع إلكترونية فحسب — بل نبني إمبراطوريات رقمية",
+    "رؤيتك وكودنا — معاً نصنع السحر",
+    "الابتكار هو ما يميز بين القائد والتابع",
+    "التصميم العظيم ليس ما تراه فقط — بل ما تشعر به",
+    "تحويل الأفكار الجريئة إلى واقع رقمي",
+    "حيث يلتقي الإبداع بالتكنولوجيا",
+    "نجاحك هو رسالتنا",
+    "التصميم هو السفير الصامت لعلامتك التجارية",
+    "نصنع المستحيل — ممكناً",
+    "التميز ليس مهارة — بل عقلية"
+];
+
+// ====== PHONE DISPLAY (RTL/LTR) ======
+const sitePhone = '+201023116065';
+function formatSitePhone(lang) {
+    let s = '+';
+    const m = sitePhone.replace(/^\+/, '');
+    s += m.slice(0, 2) + ' ' + m.slice(2, 5) + ' ' + m.slice(5, 8) + ' ' + m.slice(8);
+    if (lang === 'ar') {
+        const d = { 0: '\u0660', 1: '\u0661', 2: '\u0662', 3: '\u0663', 4: '\u0664', 5: '\u0665', 6: '\u0666', 7: '\u0667', 8: '\u0668', 9: '\u0669' };
+        s = s.replace(/[0-9]/g, (c) => d[c]);
+    }
+    return s;
+}
+function updateSitePhone(lang) {
+    const el = document.getElementById('footerPhone');
+    if (el) {
+        el.textContent = formatSitePhone(lang);
+        el.setAttribute('dir', 'ltr');
+        el.style.unicodeBidi = 'isolate';
+        el.style.direction = 'ltr';
+    }
+    document.querySelectorAll('a[href^="tel:"]').forEach((a) => a.setAttribute('href', 'tel:' + sitePhone));
+}
+
+function updateLanguageButtons(lang) {
+  const buttons = [document.getElementById('langToggle'), document.getElementById('mobileLangToggle')].filter(Boolean);
+  buttons.forEach((btn) => {
+    btn.innerHTML = lang === 'ar' ? '<span>EN</span><i data-lucide="globe" class="w-4 h-4"></i>' : '<span>العربية</span><i data-lucide="globe" class="w-4 h-4"></i>';
+  });
+  lucide.createIcons();
+}
+
+function applyLanguage(lang) {
+  const current = translations[lang] || translations.en;
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  if (current.meta) {
+    document.title = current.meta.title;
+    const mdesc = document.querySelector('meta[name="description"]');
+    if (mdesc) mdesc.setAttribute('content', current.meta.desc);
+  }
+  document.querySelectorAll('[data-i18n]').forEach((el) => {
+    const key = el.getAttribute('data-i18n');
+    const value = key.split('.').reduce((obj, part) => obj?.[part], current);
+    if (value) {
+      el.innerHTML = value;
+    }
+  });
+  const isAr = lang === 'ar';
+  document.querySelectorAll('#services .glass-card').forEach((card) => {
+    card.style.direction = isAr ? 'rtl' : 'ltr';
+    card.style.fontFamily = isAr ? "'Cairo', sans-serif" : "'Poppins', sans-serif";
+    card.classList.toggle('text-right', isAr);
+    card.classList.toggle('text-left', !isAr);
+    const h3 = card.querySelector('h3');
+    if (h3) {
+      h3.style.direction = isAr ? 'rtl' : 'ltr';
+      h3.style.textAlign = isAr ? 'right' : 'left';
+      h3.style.fontFamily = isAr ? "'Cairo', sans-serif" : "'Poppins', sans-serif";
+    }
+    card.querySelectorAll(':scope > p').forEach((p) => {
+      p.style.direction = isAr ? 'rtl' : 'ltr';
+      p.style.textAlign = isAr ? 'right' : 'left';
+    });
+  });
+  updateLanguageButtons(lang);
+  document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    const val = key.split('.').reduce((obj, part) => obj?.[part], current);
+    if (val) el.placeholder = val;
+  });
+  if (typeof updateSitePhone === 'function') {
+    updateSitePhone(lang);
+  }
+  if (typeof updateServiceDetailsLanguage === 'function') {
+    updateServiceDetailsLanguage(lang);
+  }
+  localStorage.setItem('siteLang', lang);
+}
+
+const savedLang = localStorage.getItem('siteLang') || 'en';
+applyLanguage(savedLang);
+
+const toggleLanguage = () => {
+  const nextLang = document.documentElement.lang === 'ar' ? 'en' : 'ar';
+  applyLanguage(nextLang);
+};
+const langToggle = document.getElementById('langToggle');
+if (langToggle) langToggle.addEventListener('click', toggleLanguage);
+
+const mobileLangToggle = document.getElementById('mobileLangToggle');
+if (mobileLangToggle) mobileLangToggle.addEventListener('click', () => {
+  toggleLanguage();
+  document.getElementById('mobileMenu')?.classList.remove('open');
+});
+
+// ====== LOADING SCREEN ======
+const loaderEl = document.getElementById('loader');
+let loaderHidden = false;
+const hideLoader = () => {
+    if (loaderHidden || !loaderEl) return;
+    loaderHidden = true;
+    loaderEl.classList.add('hidden');
+};
+document.addEventListener('DOMContentLoaded', () => setTimeout(hideLoader, 400));
+window.addEventListener('load', hideLoader);
+setTimeout(hideLoader, 2500);
+
+// ====== SCROLL PROGRESS ======
+window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = (scrollTop / docHeight) * 100;
+    document.getElementById('scrollProgress').style.width = scrollPercent + '%';
+});
+
+// ====== MOUSE GLOW ======
+const mouseGlow = document.getElementById('mouseGlow');
+document.addEventListener('mousemove', (e) => {
+    mouseGlow.style.left = e.clientX + 'px';
+    mouseGlow.style.top = e.clientY + 'px';
+});
+
+// ====== NAVBAR ======
+const navbar = document.getElementById('navbar');
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+    const currentScroll = window.scrollY;
+    if (currentScroll > 80) {
+        navbar.style.background = 'rgba(5,8,22,0.8)';
+        navbar.style.backdropFilter = 'blur(20px)';
+        navbar.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
+    } else {
+        navbar.style.background = 'transparent';
+        navbar.style.backdropFilter = 'none';
+        navbar.style.borderBottom = 'none';
+    }
+    lastScroll = currentScroll;
+});
+
+// ====== MOBILE MENU ======
+const mobileMenu = document.getElementById('mobileMenu');
+document.getElementById('menuToggle').addEventListener('click', () => {
+    mobileMenu.classList.add('open');
+});
+document.getElementById('menuClose').addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+});
+document.querySelectorAll('.mobile-nav').forEach(link => {
+    link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+    });
+});
+
+// ====== DARK/LIGHT MODE ======
+const themeToggle = document.getElementById('themeToggle');
+themeToggle.addEventListener('click', () => {
+    const html = document.documentElement;
+    if (html.classList.contains('dark')) {
+        html.classList.remove('dark');
+        html.classList.add('light');
+        document.querySelector('.dark-icon').classList.add('hidden');
+        document.querySelector('.light-icon').classList.remove('hidden');
+    } else {
+        html.classList.remove('light');
+        html.classList.add('dark');
+        document.querySelector('.dark-icon').classList.remove('hidden');
+        document.querySelector('.light-icon').classList.add('hidden');
+    }
+});
+
+// ====== TYPING EFFECT ======
+let quoteIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+const typingEl = document.getElementById('typingText');
+
+function typeWriter() {
+    const isArLang = document.documentElement.lang === 'ar';
+    const currentQuote = (isArLang ? quotesAr : quotesEn)[quoteIndex];
+
+    if (!isDeleting) {
+        typingEl.textContent = currentQuote.substring(0, charIndex + 1);
+        charIndex++;
+        if (charIndex === currentQuote.length) {
+            isDeleting = true;
+            setTimeout(typeWriter, 2500);
+            return;
+        }
+        setTimeout(typeWriter, 50);
+    } else {
+        typingEl.textContent = currentQuote.substring(0, charIndex - 1);
+        charIndex--;
+        if (charIndex === 0) {
+            isDeleting = false;
+            quoteIndex = (quoteIndex + 1) % (isArLang ? quotesAr : quotesEn).length;
+            setTimeout(typeWriter, 500);
+            return;
+        }
+        setTimeout(typeWriter, 30);
+    }
+}
+typeWriter();
+
+// ====== PARTICLES ======
+const particlesContainer = document.getElementById('particles');
+for (let i = 0; i < 30; i++) {
+    const particle = document.createElement('div');
+    particle.classList.add('particle');
+    const size = Math.random() * 4 + 2;
+    const colors = ['rgba(124,58,237,0.3)', 'rgba(0,212,255,0.3)', 'rgba(255,79,216,0.2)'];
+    particle.style.width = size + 'px';
+    particle.style.height = size + 'px';
+    particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+    particle.style.left = Math.random() * 100 + '%';
+    particle.style.top = Math.random() * 100 + '%';
+    particle.style.animationDelay = Math.random() * 6 + 's';
+    particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+    particlesContainer.appendChild(particle);
+}
+
+// ====== SCROLL ANIMATIONS ======
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('.fade-in-up, .scale-in').forEach(el => {
+    observer.observe(el);
+});
+
+// ====== COUNTER ANIMATION ======
+const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const counter = entry.target;
+            const target = parseInt(counter.dataset.target);
+            let current = 0;
+            const increment = target / 60;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                counter.textContent = Math.floor(current);
+            }, 30);
+            counterObserver.unobserve(counter);
+        }
+    });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('[data-target]').forEach(el => {
+    counterObserver.observe(el);
+});
+
+// ====== PORTFOLIO FILTER ======
+const filterBtns = document.querySelectorAll('.filter-btn');
+const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+
+        portfolioItems.forEach(item => {
+            if (filter === 'all' || item.dataset.category === filter) {
+                item.style.display = '';
+                item.style.opacity = '0';
+                item.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    item.style.opacity = '1';
+                    item.style.transform = 'scale(1)';
+                }, 50);
+            } else {
+                item.style.opacity = '0';
+                item.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    item.style.display = 'none';
+                }, 300);
+            }
+        });
+    });
+});
+
+// ====== TESTIMONIALS CAROUSEL ======
+let currentSlide = 0;
+const track = document.getElementById('testimonialTrack');
+const totalSlides = 4;
+let autoSlideInterval;
+
+function goToSlide(index) {
+    currentSlide = index;
+    track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    document.querySelectorAll('.testimonial-dot').forEach((dot, i) => {
+        dot.style.background = i === currentSlide ? '#7C3AED' : 'rgba(255,255,255,0.2)';
+        dot.style.width = i === currentSlide ? '24px' : '12px';
+        dot.style.borderRadius = '999px';
+    });
+}
+
+document.querySelectorAll('.testimonial-dot').forEach(dot => {
+    dot.addEventListener('click', () => {
+        goToSlide(parseInt(dot.dataset.index));
+        resetAutoSlide();
+    });
+});
+
+document.getElementById('prevTestimonial')?.addEventListener('click', () => {
+    goToSlide(currentSlide === 0 ? totalSlides - 1 : currentSlide - 1);
+    resetAutoSlide();
+});
+
+document.getElementById('nextTestimonial')?.addEventListener('click', () => {
+    goToSlide(currentSlide === totalSlides - 1 ? 0 : currentSlide + 1);
+    resetAutoSlide();
+});
+
+function startAutoSlide() {
+    autoSlideInterval = setInterval(() => {
+        goToSlide(currentSlide === totalSlides - 1 ? 0 : currentSlide + 1);
+    }, 5000);
+}
+
+function resetAutoSlide() {
+    clearInterval(autoSlideInterval);
+    startAutoSlide();
+}
+
+startAutoSlide();
+
+// ====== NEWSLETTER ======
+document.getElementById('newsletterForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const msg = document.getElementById('newsletterMsg');
+    const input = form.querySelector('input[name="email"]');
+    const btn = form.querySelector('button[type="submit"]');
+    const lang = document.documentElement.lang === 'ar' ? 'ar' : 'en';
+    const L = translations[lang].newsletter;
+    const email = (input.value || '').trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        msg.textContent = L.invalid;
+        msg.classList.remove('hidden');
+        msg.classList.add('text-red-400');
+        return;
+    }
+    msg.textContent = L.sending;
+    msg.classList.remove('hidden');
+    msg.classList.remove('text-red-400');
+    msg.classList.add('text-green-400');
+    btn.disabled = true;
+    try {
+        const res = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+        });
+        const data = await res.json();
+        if (data && data.success) {
+            msg.textContent = L.success;
+            form.reset();
+        } else {
+            msg.textContent = L.error;
+            msg.classList.remove('text-green-400');
+            msg.classList.add('text-red-400');
+        }
+    } catch (err) {
+        msg.textContent = L.error;
+        msg.classList.remove('text-green-400');
+        msg.classList.add('text-red-400');
+    } finally {
+        btn.disabled = false;
+        setTimeout(() => msg.classList.add('hidden'), 5000);
+    }
+});
+
+// ====== ACTIVE NAV LINK ======
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        if (window.scrollY >= sectionTop) {
+            current = section.getAttribute('id');
+        }
+    });
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) {
+            link.classList.add('active');
+        }
+    });
+});
+
+// ====== SMOOTH PARALLAX on HERO elements ======
+window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const heroMockup = document.querySelector('.hero-mockup');
+    if (heroMockup && scrollY < window.innerHeight) {
+        heroMockup.style.transform = `translateY(${scrollY * 0.1}px)`;
+    }
+});
+
+// ====== SERVICE DETAILS BUTTONS (open dedicated pages) ======
+const serviceLbls = {
+    en: { details: 'Read More' },
+    ar: { details: 'اقرأ المزيد' }
+};
+
+function updateServiceDetailsLanguage(lang) {
+    const lbl = serviceLbls[lang] || serviceLbls.en;
+    document.querySelectorAll('[data-i18n-lbl="details"]').forEach(el => el.textContent = lbl.details);
+}
+
+updateServiceDetailsLanguage(document.documentElement.lang === 'ar' ? 'ar' : 'en');
+</script>
+
+</body>
+</html>
