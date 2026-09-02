@@ -5,6 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Service — Dalia Ahmed Digital Agency</title>
     <meta name="description" content="Dalia Ahmed Digital Agency service details.">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Dalia Ahmed">
+    <meta name="theme-color" content="#7C3AED">
+    <link rel="canonical" href="https://daliaahmedreda.github.io/home/service.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Dalia Ahmed Digital Agency">
+    <meta property="og:title" content="Service — Dalia Ahmed Digital Agency">
+    <meta property="og:description" content="Explore our full range of digital services including web design, development, e-commerce, SEO, and digital marketing.">
+    <meta property="og:url" content="https://daliaahmedreda.github.io/home/service.html">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="ar_EG">
+    <meta property="og:image" content="https://daliaahmedreda.github.io/home/luxe.webp">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Service — Dalia Ahmed Digital Agency">
+    <meta name="twitter:description" content="Explore our full range of digital services including web design, development, e-commerce, SEO, and digital marketing.">
+    <meta name="twitter:image" content="https://daliaahmedreda.github.io/home/luxe.webp">
+
+    <!-- Hreflang -->
+    <link rel="alternate" hreflang="en" href="https://daliaahmedreda.github.io/home/service.html">
+    <link rel="alternate" hreflang="ar" href="https://daliaahmedreda.github.io/home/service.html">
+    <link rel="alternate" hreflang="x-default" href="https://daliaahmedreda.github.io/home/service.html">
+
+    <!-- Structured Data: Service -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Digital Agency Services",
+      "provider": {
+        "@type": "Organization",
+        "name": "Dalia Ahmed Digital Agency",
+        "url": "https://daliaahmedreda.github.io/home/"
+      },
+      "url": "https://daliaahmedreda.github.io/home/service.html",
+      "areaServed": "Worldwide",
+      "availableLanguage": ["en", "ar"]
+    }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -365,6 +407,8 @@ function applyLang() {
     document.documentElement.lang = currentLang;
     document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
     document.title = t.title + ' — Dalia Ahmed Digital Agency';
+    const mdesc = document.querySelector('meta[name="description"]');
+    if (mdesc) mdesc.setAttribute('content', t.desc);
     document.getElementById('serviceTitle').textContent = t.title;
     document.getElementById('serviceDesc').textContent = t.desc;
     document.getElementById('contentBody').innerHTML = `
